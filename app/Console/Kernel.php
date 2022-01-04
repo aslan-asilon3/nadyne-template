@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('clean:member_raw')->hourly();
+        //$schedule->command('clean:member_raw')->timezone('Asia/Jakarta')->hourly();
     }
 
     /**
