@@ -39,7 +39,7 @@ class CleanMemberRaw extends Command
      */
     public function handle()
     {
-        $member_raw = UnicharmMemberRaw::whereNull('status_cek_data')->take(100000)->get();
+        $member_raw = UnicharmMemberRaw::whereNull('status_cek_data')->take(200000)->get();
 
         foreach ($member_raw as $m) {
             $member = UnicharmMember::where('no_hp', $m->no_hp)->first();
