@@ -43,24 +43,6 @@ class CekDataSalesMembership extends Command
 
         foreach ($data_sales as $ds) {
             $member = UnicharmMember::where('no_hp', trim($ds->no_hp))->first();
-
-            $akumulasi_poin = AkumulasiPoin::where('no_hp', trim($ds->no_hp))
-                ->where('batch', trim($ds->batch))
-                ->first();
-
-            if (!$akumulasi_poin) {
-                AkumulasiPoin::create([
-                    'id_member'     => $ds->id_member,
-                    'batch'         => $ds->batch,
-                    'no_hp'         => $ds->no_hp,
-                    'poin'          => $ds->poin,
-                ]);
-            } else {
-                $data_akumulasi_poin = AkumulasiPoin::find($akumulasi_poin->id);
-                $data_akumulasi_poin->poin = $akumulasi_poin->poin + $ds->poin;
-                $data_akumulasi_poin->save();
-            }
-
             $data_sales = DataSales::find($ds->id);
 
             if ($member) {
@@ -77,6 +59,24 @@ class CekDataSalesMembership extends Command
 
             $data_sales->status_cek_is_member = '1';
             $data_sales->save();
+
+            ########################### Perhitungan akumulasi poin
+            $akumulasi_poin = AkumulasiPoin::where('no_hp', trim($ds->no_hp))
+                ->where('batch', trim($ds->batch))
+                ->first();
+
+            if (!$akumulasi_poin) {
+                AkumulasiPoin::create([
+                    'id_member'     => $ds->id_member,
+                    'batch'         => $ds->batch,
+                    'no_hp'         => $ds->no_hp,
+                    'poin'          => $ds->poin,
+                ]);
+            } else {
+                $data_akumulasi_poin = AkumulasiPoin::find($akumulasi_poin->id);
+                $data_akumulasi_poin->poin = $akumulasi_poin->poin + $ds->poin;
+                $data_akumulasi_poin->save();
+            }
         }
     }
 }
