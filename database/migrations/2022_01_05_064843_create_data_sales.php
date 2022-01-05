@@ -23,6 +23,7 @@ class CreateDataSales extends Migration
             $table->string('source', 100);
             $table->string('recipient', 100);
             $table->string('status_member', 1)->nullable();
+            $table->string('status_cek_is_member', 1)->nullable();
             $table->timestamps();
 
             $table->index('no_hp', 'plain_index_data_sales_no_hp');
