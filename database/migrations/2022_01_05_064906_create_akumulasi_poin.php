@@ -18,6 +18,7 @@ class CreateAkumulasiPoin extends Migration
             $table->unsignedBigInteger('id_member')->nullable();
             $table->string('no_hp', 20);
             $table->string('batch', 20);
+            $table->unsignedInteger('poin')->default(0);
             $table->timestamps();
 
             $table->index('no_hp', 'plain_index_akumulasi_poin_no_hp');

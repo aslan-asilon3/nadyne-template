@@ -44,12 +44,15 @@ class CekDataSalesMembership extends Command
         foreach ($data_sales as $ds) {
             $member = UnicharmMember::where('no_hp', trim($ds->no_hp))->first();
 
-            $akumulasi_poin = AkumulasiPoin::where('no_hp', trim($ds->no_hp))->where('batch', trim($ds->batch))->first();
+            $akumulasi_poin = AkumulasiPoin::where('no_hp', trim($ds->no_hp))
+                ->where('batch', trim($ds->batch))
+                ->first();
 
             if (!$akumulasi_poin) {
                 AkumulasiPoin::create([
                     'batch' => $ds->batch,
                     'no_hp' => $ds->no_hp,
+                    'poin' => $ds->poin,
                 ]);
             } else {
                 $data_akumulasi_poin = AkumulasiPoin::find($akumulasi_poin->id);
