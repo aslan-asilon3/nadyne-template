@@ -50,9 +50,10 @@ class CekDataSalesMembership extends Command
 
             if (!$akumulasi_poin) {
                 AkumulasiPoin::create([
-                    'batch' => $ds->batch,
-                    'no_hp' => $ds->no_hp,
-                    'poin' => $ds->poin,
+                    'id_member'     => $ds->id_member,
+                    'batch'         => $ds->batch,
+                    'no_hp'         => $ds->no_hp,
+                    'poin'          => $ds->poin,
                 ]);
             } else {
                 $data_akumulasi_poin = AkumulasiPoin::find($akumulasi_poin->id);
