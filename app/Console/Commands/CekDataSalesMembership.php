@@ -3,7 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-
+use App\Models\UnicharmMember;
+use App\Models\DataSales;
 class CekDataSalesMembership extends Command
 {
     /**
@@ -11,7 +12,7 @@ class CekDataSalesMembership extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'cek:data_sales_membership';
 
     /**
      * The console command description.
@@ -37,6 +38,26 @@ class CekDataSalesMembership extends Command
      */
     public function handle()
     {
-        return 0;
+        $data_sales = DataSales::whereNull('status_cek_is_member')->take(10000)->get();
+
+        foreach ($data_sales as $ds) {
+            $member = UnicharmMember::where('no_hp', $ds->no_hp)->first();
+
+            $data_sales = DataSales::find($ds->id);
+
+            if (!$member) {
+                $data_sales->status_member = '0';
+
+                echo '0 : '.$ds->id. "\n";
+            } else {
+                $data_sales->status_member = '1';
+
+                echo '1 : '.$ds->id. "\n";
+            }
+
+            $data_sales->id_member = $member->id_member;
+            $data_sales->status_cek_is_member = '1';
+            $data_sales->save();
+        }
     }
 }
