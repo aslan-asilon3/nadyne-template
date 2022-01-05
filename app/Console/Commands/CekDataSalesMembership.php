@@ -56,7 +56,7 @@ class CekDataSalesMembership extends Command
                 ]);
             } else {
                 $data_akumulasi_poin = AkumulasiPoin::find($akumulasi_poin->id);
-                $data_akumulasi_poin->poin = $data_akumulasi_poin->poin + $ds->poin;
+                $data_akumulasi_poin->poin = $akumulasi_poin->poin + $ds->poin;
                 $data_akumulasi_poin->save();
             }
 
