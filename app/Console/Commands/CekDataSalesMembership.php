@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\UnicharmMember;
 use App\Models\DataSales;
+use App\Models\AkumulasiPoin;
 class CekDataSalesMembership extends Command
 {
     /**
@@ -38,10 +39,23 @@ class CekDataSalesMembership extends Command
      */
     public function handle()
     {
-        $data_sales = DataSales::whereNull('status_cek_is_member')->take(10000)->get();
+        $data_sales = DataSales::whereNull('status_cek_is_member')->take(20000)->get();
 
         foreach ($data_sales as $ds) {
             $member = UnicharmMember::where('no_hp', trim($ds->no_hp))->first();
+
+            $akumulasi_poin = AkumulasiPoin::where('no_hp', trim($ds->no_hp))->where('batch', trim($ds->batch))->first();
+
+            if (!$akumulasi_poin) {
+                AkumulasiPoin::create([
+                    'batch' => $ds->batch,
+                    'no_hp' => $ds->no_hp,
+                ]);
+            } else {
+                $data_akumulasi_poin = AkumulasiPoin::find($akumulasi_poin->id);
+                $data_akumulasi_poin->poin = $data_akumulasi_poin->poin + $ds->poin;
+                $data_akumulasi_poin->save();
+            }
 
             $data_sales = DataSales::find($ds->id);
 
