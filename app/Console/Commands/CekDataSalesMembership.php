@@ -39,7 +39,7 @@ class CekDataSalesMembership extends Command
      */
     public function handle()
     {
-        $data_sales = DataSales::whereNull('status_cek_is_member')->take(20000)->get();
+        $data_sales = DataSales::whereNull('status_cek_is_member')->take(100000)->get();
 
         foreach ($data_sales as $ds) {
             $member = UnicharmMember::where('no_hp', trim($ds->no_hp))->first();
