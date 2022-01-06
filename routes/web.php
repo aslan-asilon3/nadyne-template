@@ -18,3 +18,9 @@ Route::get('/', function () {
 });
 
 Route::get('test/cek-member-data', 'TestController@cekMemberRaw');
+
+Auth::routes([
+    "register" => false
+]);
+
+Route::get('/home', 'HomeController@index')->name('home');
