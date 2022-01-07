@@ -70,7 +70,15 @@
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="{{ asset('favicon/ms-icon-144x144.png') }}">
     @endif
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+        </style>
+    <style>
+        body {
+          font-family: 'Poppins', serif;
 
+        }
+      </style>
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>
