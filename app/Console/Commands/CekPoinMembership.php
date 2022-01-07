@@ -43,16 +43,19 @@ class CekPoinMembership extends Command
         foreach ($data_poin as $dp) {
             $member = UnicharmMember::where('no_hp', trim($dp->no_hp))->first();
 
+            $data_poin = AkumulasiPoin::find($dp->id);
+
             if ($member) {
                 echo 'member-found : '.$dp->id. "\n";
-
-                $data_poin = AkumulasiPoin::find($dp->id);
                 $data_poin->id_member = $member->id_member;
                 $data_poin->status_cek_membership = '1';
-                $data_poin->save();
+
             } else {
                 echo 'member-not-found : '.$dp->id. "\n";
+                $data_poin->status_cek_membership = '1';
             }
+
+            $data_poin->save();
         }
         //return 0;
     }
