@@ -104,7 +104,7 @@ return [
 
     'classes_auth_card' => 'card-outline card-primary',
     'classes_auth_header' => '',
-    'classes_auth_body' => '',
+    'classes_auth_body' => 'text-sm',
     'classes_auth_footer' => '',
     'classes_auth_icon' => '',
     'classes_auth_btn' => 'btn-flat btn-primary',
@@ -121,7 +121,7 @@ return [
     |
     */
 
-    'classes_body' => 'sidebar-mini layout-fixed control-sidebar-slide-open',
+    'classes_body' => 'sidebar-mini layout-fixed control-sidebar-slide-open text-sm',
     'classes_brand' => '',
     'classes_brand_text' => '',
     'classes_content_wrapper' => '',
