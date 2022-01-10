@@ -75,7 +75,11 @@
         </style>
     <style>
         body {
-          font-family: 'Poppins', serif;
+            font-family: Poppins,Helvetica,sans-serif;
+            font-size: 13px!important;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            color: #181c32 !important;
         }
         .text-sm {
             font-size: .8rem!important;
