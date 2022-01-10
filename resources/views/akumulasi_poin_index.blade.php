@@ -63,8 +63,8 @@
                         }
                     },
                     { "data": "id_member", "name": "id_member" },
-                    { "data": "no_hp", "name" : "no_hp" },
                     { "data": "batch", "name" : "batch" },
+                    { "data": "no_hp", "name" : "no_hp" },
                     { "data": "poin", "name" : "poin" },
                     { "data": "created_at", "name" : "created_at" },
                 ],
