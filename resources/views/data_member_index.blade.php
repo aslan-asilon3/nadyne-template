@@ -35,7 +35,7 @@
                 }
             });
 
-            var tabel = $('#data_sales_table');
+            var tabel = $('#data_member_table');
             tabel.DataTable({
                 "responsive":true,
                 "processing": true,
@@ -43,15 +43,11 @@
                 "ordering": false,
                 "searching": true,
                 "ajax": {
-                    url: "{{ route('ajax-data-sales') }}",
+                    url: "{{ route('ajax-data-member') }}",
                     type: 'GET',
                     data: function (d) {
-                        d.batch         = $('#batch').val();
-                        d.poin          = $('#poin').val();
+                        d.id_member         = $('#id_member').val();
                         d.no_hp         = $('#no_hp').val();
-                        d.tanggal       = $('#tanggal').val();
-                        d.source        = $('#source').val();
-                        d.recipient     = $('#recipient').val();
                         d.created_at    = $('#created_at').val();
                     }
                 },
@@ -63,12 +59,7 @@
                         }
                     },
                     { "data": "id_member", "name": "id_member" },
-                    { "data": "batch", "name": "batch" },
-                    { "data": "poin", "name" : "poin" },
                     { "data": "no_hp", "name" : "no_hp" },
-                    { "data": "tanggal", "name" : "tanggal" },
-                    { "data": "source", "name" : "source" },
-                    { "data": "recipient", "name": "recipient" },
                     { "data": "created_at", "name" : "created_at" },
                 ],
                 "columnDefs": [
@@ -85,14 +76,14 @@
                         extend: 'excel',
                         title : '',
                         exportOptions: {
-                            columns: [ 0, 1, 2, 3, 4]
+                            columns: [ 0, 1, 2]
                         }
                     },
                     {
                         extend: 'print',
                         title : '',
                         exportOptions: {
-                            columns: [ 0, 1, 2, 3, 4]
+                            columns: [ 0, 1, 2]
                         }
                     },
                 ],

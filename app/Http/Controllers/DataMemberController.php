@@ -18,7 +18,7 @@ class DataMemberController extends Controller
 
     public function ajax(Request $request)
     {
-        $data_member = UnicharmMember::select('id', 'id_member', 'no_hp', 'batch', 'poin', 'created_at');
+        $data_member = UnicharmMember::select('id', 'id_member', 'no_hp', 'created_at');
         $data_member->orderBy('id', 'ASC');
         $datatables = UnicharmMember::datatables($data_member);
 
