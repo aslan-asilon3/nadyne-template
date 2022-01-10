@@ -49,4 +49,5 @@
 @section('adminlte_js')
     @stack('js')
     @yield('js')
+    @yield('custom_js')
 @stop
