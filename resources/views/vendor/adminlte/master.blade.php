@@ -76,7 +76,12 @@
     <style>
         body {
           font-family: 'Poppins', serif;
-
+        }
+        .text-sm {
+            font-size: .8rem!important;
+        }
+        .brand-link {
+            font-size: 1.17rem !important;
         }
       </style>
 </head>
