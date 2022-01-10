@@ -81,8 +81,8 @@
                 ],
                 "pageLength": 50,
                 'lengthMenu': [
-                    [ 10, 50, 100000, 3000, 4000 ],
-                    [ '10 rows', '50 rows', '1000 rows', '2000 rows', '3000 rows', '4000 rows' ]
+                    [ 10, 50, 100, 300, 400 ],
+                    [ '10 rows', '50 rows', '100 rows', '300 rows', '400 rows']
                 ],
                 "dom": 'lBfrtip',
                 "buttons": [

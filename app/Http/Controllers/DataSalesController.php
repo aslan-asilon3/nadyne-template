@@ -20,9 +20,6 @@ class DataSalesController extends Controller
     {
         $data_sales = DataSales::select('id', 'id_member', 'batch', 'poin', 'no_hp', 'tanggal', 'source', 'recipient', 'created_at');
         $data_sales->orderBy('id', 'ASC');
-
-        // $sms_logs = $sms_logs->get();
-        // $sms_logs->chunk(100);
         $datatables = DataSales::datatables($data_sales);
 
         return $datatables;

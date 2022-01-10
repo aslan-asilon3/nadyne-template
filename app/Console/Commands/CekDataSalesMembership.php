@@ -39,7 +39,10 @@ class CekDataSalesMembership extends Command
      */
     public function handle()
     {
-        $data_sales = DataSales::whereNull('status_cek_is_member')->take(100000)->get();
+        $data_sales = DataSales::whereNull('status_cek_is_member')
+                ->where('batch','=','2021-05')
+                ->take(10000)
+                ->get();
 
         foreach ($data_sales as $ds) {
             $member = UnicharmMember::where('no_hp', trim($ds->no_hp))->first();
@@ -61,6 +64,7 @@ class CekDataSalesMembership extends Command
             $data_sales->save();
 
             ########################### Perhitungan akumulasi poin
+            /*
             $akumulasi_poin = AkumulasiPoin::where('no_hp', trim($ds->no_hp))
                 ->where('batch', trim($ds->batch))
                 ->first();
@@ -77,6 +81,7 @@ class CekDataSalesMembership extends Command
                 $data_akumulasi_poin->poin = $akumulasi_poin->poin + $ds->poin;
                 $data_akumulasi_poin->save();
             }
+            */
         }
     }
 }
