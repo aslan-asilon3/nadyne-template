@@ -127,29 +127,29 @@ $(document).ready(function() {
     });
 
     $('#export_excel').on('click',function () {
-                var id_member       = $('#id_member').val();
-                var no_hp           = $('#no_hp').val();
-                var download_url    = "{{ url('data-member/action-excel') }}";
+        var id_member       = $('#id_member').val();
+        var no_hp           = $('#no_hp').val();
+        var download_url    = "{{ url('data-member/action-excel') }}";
 
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
-                jQuery.ajax({
-                    url:"{{ url('data-member/export-excel') }}",
-                    type:"POST",
-                    data:{
-                        id_member : id_member,
-                        no_hp : no_hp,
-                    },
-                    success: function (result) {
-                        //console.log(result);
-                        window.location.href = download_url + '/' +result;
-                    }
-                });
-            });
+        jQuery.ajax({
+            url:"{{ url('data-member/export-excel') }}",
+            type:"POST",
+            data:{
+                id_member : id_member,
+                no_hp : no_hp,
+            },
+            success: function (result) {
+                //console.log(result);
+                window.location.href = download_url + '/' +result;
+            }
+        });
+    });
 
 });
 </script>

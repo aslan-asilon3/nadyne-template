@@ -138,6 +138,34 @@ $(document).ready(function() {
         $('.btn-reset').hide();
     });
 
+    $('#export_excel').on('click',function () {
+        var id_member       = $('#id_member').val();
+        var no_hp           = $('#no_hp').val();
+        var poin            = $('#poin').val();
+        var batch            = $('#batch').val();
+        var download_url    = "{{ url('data-member/action-excel') }}";
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        jQuery.ajax({
+            url:"{{ url('akumulasi-poin/export-excel') }}",
+            type:"POST",
+            data:{
+                id_member : id_member,
+                no_hp : no_hp,
+                poin: poin,
+                batch: batch
+            },
+            success: function (result) {
+                //console.log(result);
+                window.location.href = download_url + '/' +result;
+            }
+        });
+    });
 });
 </script>
 @stop
