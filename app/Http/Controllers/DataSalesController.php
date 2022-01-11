@@ -8,13 +8,14 @@ use Auth;
 use DB;
 use DataTables;
 use Rap2hpoutre\FastExcel\FastExcel;
-
+use App\Models\DataSales;
 class DataSalesController extends Controller
 {
     public function index()
     {
+        $list_batch = DataSales::getBatch();
         $user = Auth::user();
-        return view('data_sales_index', compact('user'));
+        return view('data_sales_index', compact('user', 'list_batch'));
     }
 
     public function ajax(Request $request)
