@@ -162,7 +162,7 @@ $(document).ready(function() {
             },
             success: function (result) {
                 console.log(result);
-                //window.location.href = download_url + '/' +result;
+                window.location.href = download_url + '/' +result;
             }
         });
     });
