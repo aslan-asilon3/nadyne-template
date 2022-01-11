@@ -143,7 +143,7 @@ $(document).ready(function() {
         var no_hp           = $('#no_hp').val();
         var poin            = $('#poin').val();
         var batch            = $('#batch').val();
-        var download_url    = "{{ url('data-member/action-excel') }}";
+        var download_url    = "{{ url('akumulasi-poin/action-excel') }}";
 
         $.ajaxSetup({
             headers: {
