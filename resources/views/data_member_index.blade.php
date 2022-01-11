@@ -43,20 +43,20 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="msisdn">Nomer HP</label>
-                                        <input type="number" name="no_hp" id="no_hp" class="form-control mb-2" />
-
-                                        <label for="desc_info">Batch</label>
-                                        <select class="form-control" name="batch" id="batch">
-                                            <option value="">-- Select Batch --</option>
-                                        </select>
-                                    </div>
-
+                            <div class="col-md-12">
+                                <label for="msisdn">ID Member</label>
+                                <input type="number" name="id_member" id="id_member" class="form-control mb-2" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="msisdn">Nomer HP</label>
+                                <input type="tel" name="no_hp" id="no_hp" class="form-control mb-2" />
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button id="submit" class="btn btn-primary btn-flat">Submit</button>
+                        <button id="submit-filter" class="btn btn-primary btn-flat">Submit</button>
                     </div>
                 </div>
             </form>
@@ -68,30 +68,29 @@
 <script type="text/javascript" src="{{ asset('vendor/datatables/FixedHeader-3.1.7/js/dataTables.fixedHeader.js') }}"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
 
-    var tabel = $('#data_member_table');
-    tabel.DataTable({
-        "responsive":true,
-        "processing": true,
-        "serverSide": true,
-        "ordering": false,
-        "searching": true,
-        "ajax": {
+    var tabel = $('#data_member_table').DataTable({
+        processing: true,
+        ordering: false,
+        serverSide: true,
+        searching: false,
+        ajax: {
             url: "{{ route('ajax-data-member') }}",
-            type: 'GET',
+            type: 'POST',
             data: function (d) {
-                d.id_member         = $('#id_member').val();
+                d.id_member     = $('#id_member').val();
                 d.no_hp         = $('#no_hp').val();
-                d.created_at    = $('#created_at').val();
+                // d.created_at    = $('#created_at').val();
             }
         },
-        "deferRender": true,
-        "columns": [
+        deferRender: true,
+        columns: [
             { "data": "id", "name": "id",
                 render: function (data, type, row, meta) {
                     return meta.row + meta.settings._iDisplayStart + 1;
@@ -101,18 +100,19 @@ $(document).ready(function() {
             { "data": "no_hp", "name" : "no_hp" },
             { "data": "created_at", "name" : "created_at" },
         ],
-        "columnDefs": [
-
-        ],
-        "pageLength": 50,
-        'lengthMenu': [
+        pageLength: 50,
+        lengthMenu: [
             [ 10, 50, 100, 300, 400 ],
             [ '10 rows', '50 rows', '100 rows', '300 rows', '400 rows']
-        ],
-        "dom": 'lBfrtip',
-        "buttons": [
+        ]
+    });
 
-        ],
+    $('#submit-filter').on('click',function (e) {
+        console.log($('#id_member').val());
+        $('#modal-filter').modal('hide');
+        tabel.draw();
+        e.preventDefault();
+        $('.btn-reset').show();
     });
 
     $("#filter-show").on('click',function (e) {
@@ -121,7 +121,7 @@ $(document).ready(function() {
 
     $('#reset').click(function(e) {
         $("#search-form").trigger("reset");
-        table.draw();
+        tabel.draw();
         e.preventDefault();
         $('.btn-reset').delay(1000).hide(0);
     });
