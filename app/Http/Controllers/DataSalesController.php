@@ -8,7 +8,7 @@ use Auth;
 use DB;
 use DataTables;
 use Rap2hpoutre\FastExcel\FastExcel;
-use App\Models\DataSales;
+
 class DataSalesController extends Controller
 {
     public function index()
