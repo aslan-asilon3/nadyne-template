@@ -7,6 +7,7 @@ use App\Models\DataSales;
 use Auth;
 use DB;
 use DataTables;
+use Rap2hpoutre\FastExcel\FastExcel;
 
 class DataSalesController extends Controller
 {
@@ -23,5 +24,15 @@ class DataSalesController extends Controller
         $datatables = DataSales::datatables($data_sales);
 
         return $datatables;
+    }
+
+    public function exportExcel(Request $request)
+    {
+
+    }
+
+    public function actionDownloadExcel($file_name)
+    {
+        return response()->download(public_path('export/'.$file_name.'.xlsx'));
     }
 }

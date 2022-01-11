@@ -15,7 +15,7 @@
             <div class="col-12">
                 <button type="button" class="btn btn-primary btn-flat" id="filter-show"><i class="fas fa-search"></i> Filter</button>
                 <button type="button" class="btn btn-secondary btn-reset btn-flat" id="reset" style="display:none"><i class="fas fa-sync"></i> Reset</button>
-                <button type="button" id="download" class="btn btn-success btn-flat"><i class="fas fa-download"></i> Download Excel</button>
+                <button type="button" id="export_excel" class="btn btn-success btn-flat"><i class="fas fa-download"></i> Download Excel</button>
             </div>
         </div>
         <div class="mb-3"></div>
@@ -125,6 +125,32 @@ $(document).ready(function() {
         e.preventDefault();
         $('.btn-reset').delay(1000).hide(0);
     });
+
+    $('#export_excel').on('click',function () {
+                var id_member       = $('#id_member').val();
+                var no_hp           = $('#no_hp').val();
+                var download_url    = "{{ url('data-member/action-excel') }}";
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                jQuery.ajax({
+                    url:"{{ url('data-member/export-excel') }}",
+                    type:"POST",
+                    data:{
+                        id_member : id_member,
+                        no_hp : no_hp,
+                    },
+                    success: function (result) {
+                        //console.log(result);
+                        window.location.href = download_url + '/' +result;
+                    }
+                });
+            });
+
 });
 </script>
 @stop

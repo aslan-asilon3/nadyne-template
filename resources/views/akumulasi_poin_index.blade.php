@@ -47,12 +47,18 @@
                 <div class="modal-body">
                     <div class="row">
                                 <div class="col-md-6">
-                                    <label for="msisdn">Nomer HP</label>
-                                    <input type="number" name="no_hp" id="no_hp" class="form-control mb-2" />
+                                    <label for="no_hp">Nomer HP</label>
+                                    <input type="tel" name="no_hp" id="no_hp" class="form-control mb-2" />
+
+                                    <label for="poin">Poin</label>
+                                    <input type="number" name="no_hp" id="poin" class="form-control mb-2" />
 
                                     <label for="desc_info">Batch</label>
                                     <select class="form-control" name="batch" id="batch">
                                         <option value="">-- Select Batch --</option>
+                                        @foreach ($list_batch as $b)
+                                            <option value="{{ $b->batch }}">{{ $b->batch }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
@@ -77,14 +83,12 @@ $(document).ready(function() {
             }
         });
 
-        var tabel = $('#akumulasi_poin_table');
-        tabel.DataTable({
-            "responsive":true,
-            "processing": true,
-            "serverSide": true,
-            "ordering": false,
-            "searching": true,
-            "ajax": {
+        var tabel = $('#akumulasi_poin_table').DataTable({
+            processing: true,
+            ordering: false,
+            serverSide: true,
+            searching: false,
+            ajax: {
                 url: "{{ route('ajax-akumulasi-poin') }}",
                 type: 'GET',
                 data: function (d) {
@@ -95,8 +99,8 @@ $(document).ready(function() {
                     d.created_at    = $('#created_at').val();
                 }
             },
-            "deferRender": true,
-            "columns": [
+            deferRender: true,
+            columns: [
                 { "data": "id", "name": "id",
                     render: function (data, type, row, meta) {
                         return meta.row + meta.settings._iDisplayStart + 1;
@@ -108,19 +112,20 @@ $(document).ready(function() {
                 { "data": "poin", "name" : "poin" },
                 { "data": "created_at", "name" : "created_at" },
             ],
-            "columnDefs": [
-
-            ],
             "pageLength": 50,
             'lengthMenu': [
                 [ 10, 50, 100, 300, 400 ],
                 [ '10 rows', '50 rows', '100 rows', '300 rows', '400 rows']
-            ],
-            "dom": 'lBfrtip',
-            "buttons": [
-
-            ],
+            ]
         });
+
+    $('#submit-filter').on('click',function (e) {
+        console.log($('#id_member').val());
+        $('#modal-filter').modal('hide');
+        tabel.draw();
+        e.preventDefault();
+        $('.btn-reset').show();
+    });
 
     $("#filter-show").on('click',function (e) {
         $('#modal-filter').modal('show');
@@ -128,7 +133,7 @@ $(document).ready(function() {
 
     $('#reset').click(function(e) {
         $("#search-form").trigger("reset");
-        table.draw();
+        tabel.draw();
         e.preventDefault();
         $('.btn-reset').delay(1000).hide(0);
     });

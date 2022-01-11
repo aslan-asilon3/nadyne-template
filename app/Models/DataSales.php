@@ -27,4 +27,9 @@ class DataSales extends Model
 
         return $datatables;
     }
+
+    public static function getBatch()
+    {
+        return DataSales::select('batch')->groupBy('batch')->get();
+    }
 }
