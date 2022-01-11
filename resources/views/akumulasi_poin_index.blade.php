@@ -161,8 +161,8 @@ $(document).ready(function() {
                 batch: batch
             },
             success: function (result) {
-                //console.log(result);
-                window.location.href = download_url + '/' +result;
+                console.log(result);
+                //window.location.href = download_url + '/' +result;
             }
         });
     });
