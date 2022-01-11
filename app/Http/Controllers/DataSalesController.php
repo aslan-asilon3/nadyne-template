@@ -21,6 +21,27 @@ class DataSalesController extends Controller
     public function ajax(Request $request)
     {
         $data_sales = DataSales::select('id', 'id_member', 'batch', 'poin', 'no_hp', 'tanggal', 'source', 'recipient', 'created_at');
+
+        if (!empty($request->no_hp)) {
+            $data_sales->where('no_hp', $request->no_hp);
+        }
+
+        if (!empty($request->batch)) {
+            $data_sales->where('batch', $request->batch);
+        }
+
+        if (!empty($request->poin)) {
+            $data_sales->where('poin', $request->poin);
+        }
+
+        if (!empty($request->recipient)) {
+            $data_sales->where('recipient', $request->recipient);
+        }
+
+        if (!empty($request->source)) {
+            $data_sales->where('source', $request->source);
+        }
+
         $data_sales->orderBy('id', 'ASC');
         $datatables = DataSales::datatables($data_sales);
 
@@ -29,7 +50,49 @@ class DataSalesController extends Controller
 
     public function exportExcel(Request $request)
     {
+        $data_sales = DataSales::select('id', 'id_member', 'batch', 'poin', 'no_hp', 'tanggal', 'source', 'recipient', 'created_at');
 
+        if (!empty($request->no_hp)) {
+            $data_sales->where('no_hp', $request->no_hp);
+        }
+
+        if (!empty($request->batch)) {
+            $data_sales->where('batch', $request->batch);
+        }
+
+        if (!empty($request->poin)) {
+            $data_sales->where('poin', $request->poin);
+        }
+
+        if (!empty($request->recipient)) {
+            $data_sales->where('recipient', $request->recipient);
+        }
+
+        if (!empty($request->source)) {
+            $data_sales->where('source', $request->source);
+        }
+
+        $data_sales->orderBy('id', 'ASC');
+
+        $content = $data_sales->get();
+
+        $filename = 'akumulasi-poin-'.date('Y-m-d-H-i');
+
+        (new FastExcel($content))->export(public_path('export/'.$filename.'.xlsx'), function ($value) {
+
+            return [
+                'ID'            => $value->id,
+                'ID MEMBER'     => $value->id_member,
+                'NO HP'         => $value->no_hp,
+                'BATCH'         => $value->batch,
+                'POIN'          => $value->poin,
+                'RECIPIENT'     => $value->recipient,
+                'SOURCE'        => $value->source,
+                'CREATED AT'    => $value->created_at
+            ];
+        });
+
+        return $filename;
     }
 
     public function actionDownloadExcel($file_name)

@@ -52,8 +52,17 @@
                 <div class="modal-body">
                     <div class="row">
                                 <div class="col-md-6">
-                                    <label for="msisdn">Nomer HP</label>
-                                    <input type="number" name="no_hp" id="no_hp" class="form-control mb-2" />
+                                    <label for="no_hp">Nomer HP</label>
+                                    <input type="tel" name="no_hp" id="no_hp" class="form-control mb-2" />
+
+                                    <label for="poin">Poin</label>
+                                    <input type="number" name="poin" id="poin" class="form-control mb-2" />
+
+                                    <label for="recipient">Recipient</label>
+                                    <input type="text" name="recipient" id="recipient" class="form-control mb-2" />
+
+                                    <label for="source">Source</label>
+                                    <input type="text" name="source" id="source" class="form-control mb-2" />
 
                                     <label for="desc_info">Batch</label>
                                     <select class="form-control" name="batch" id="batch">
@@ -87,12 +96,11 @@ $(document).ready(function() {
 
     var tabel = $('#data_sales_table');
     tabel.DataTable({
-        "responsive":true,
-        "processing": true,
-        "serverSide": true,
-        "ordering": false,
-        "searching": true,
-        "ajax": {
+        processing: true,
+        ordering: false,
+        serverSide: true,
+        searching: false,
+        ajax: {
             url: "{{ route('ajax-data-sales') }}",
             type: 'GET',
             data: function (d) {
@@ -135,15 +143,52 @@ $(document).ready(function() {
         ],
     });
 
+    $('#submit-filter').on('click',function (e) {
+        console.log($('#id_member').val());
+        $('#modal-filter').modal('hide');
+        tabel.draw();
+        e.preventDefault();
+        $('.btn-reset').show();
+    });
+
     $("#filter-show").on('click',function (e) {
         $('#modal-filter').modal('show');
     });
 
     $('#reset').click(function(e) {
         $("#search-form").trigger("reset");
-        table.draw();
+        tabel.draw();
         e.preventDefault();
-        $('.btn-reset').delay(1000).hide(0);
+        $('.btn-reset').hide();
+    });
+
+    $('#export_excel').on('click',function () {
+        var id_member       = $('#id_member').val();
+        var no_hp           = $('#no_hp').val();
+        var poin            = $('#poin').val();
+        var batch            = $('#batch').val();
+        var download_url    = "{{ url('data-sales/action-excel') }}";
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        jQuery.ajax({
+            url:"{{ url('data-sales/export-excel') }}",
+            type:"POST",
+            data:{
+                id_member : id_member,
+                no_hp : no_hp,
+                poin: poin,
+                batch: batch
+            },
+            success: function (result) {
+                console.log(result);
+                window.location.href = download_url + '/' +result;
+            }
+        });
     });
 
 });
