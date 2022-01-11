@@ -32,6 +32,10 @@ class AkumulasiPoinController extends Controller
             $akumulasi_poin->where('batch', $request->batch);
         }
 
+        if (!empty($request->poin)) {
+            $akumulasi_poin->where('poin', $request->poin);
+        }
+
         $datatables = AkumulasiPoin::datatables($akumulasi_poin);
 
         return $datatables;
@@ -39,7 +43,38 @@ class AkumulasiPoinController extends Controller
 
     public function exportExcel(Request $request)
     {
+        $akumulasi_poin = AkumulasiPoin::select('id', 'id_member', 'no_hp', 'batch', 'poin', 'created_at');
+        $akumulasi_poin->orderBy('id', 'ASC');
 
+        if (!empty($request->no_hp)) {
+            $akumulasi_poin->where('no_hp', $request->no_hp);
+        }
+
+        if (!empty($request->batch)) {
+            $akumulasi_poin->where('batch', $request->batch);
+        }
+
+        if (!empty($request->poin)) {
+            $akumulasi_poin->where('poin', $request->poin);
+        }
+
+        $content = $akumulasi_poin->get();
+
+        $filename = 'akumulasi-poin-'.date('Y-m-d-H-i');
+
+        (new FastExcel($content))->export(public_path('export/'.$filename.'.xlsx'), function ($value) {
+
+            return [
+                'ID'            => $value->id,
+                'ID MEMBER'     => $value->id_member,
+                'NO HP'         => $value->no_hp,
+                'BATCH'         => $value->batch,
+                'POIN'          => $value->poin,
+                'CREATED AT'    => $value->created_at
+            ];
+        });
+
+        return $filename;
     }
 
     public function actionDownloadExcel($file_name)
