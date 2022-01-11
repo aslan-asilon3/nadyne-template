@@ -166,7 +166,9 @@ $(document).ready(function() {
         var id_member       = $('#id_member').val();
         var no_hp           = $('#no_hp').val();
         var poin            = $('#poin').val();
-        var batch            = $('#batch').val();
+        var batch           = $('#batch').val();
+        var recipient       = $('#recipient').val();
+        var source          = $('#source').val();
         var download_url    = "{{ url('data-sales/action-excel') }}";
 
         $.ajaxSetup({
@@ -182,7 +184,9 @@ $(document).ready(function() {
                 id_member : id_member,
                 no_hp : no_hp,
                 poin: poin,
-                batch: batch
+                batch: batch,
+                recipient: recipient,
+                source: source
             },
             success: function (result) {
                 console.log(result);
