@@ -12,7 +12,17 @@ class UnicharmMember extends Model
 
     public static function datatables($data_member)
     {
-        $datatables = Datatables::of($data_member)->make(true);
+        $datatables = Datatables::of($data_member)
+            ->editColumn('created_at', function(UnicharmMember $unicharm_member) {
+                if ($unicharm_member->created_at) {
+                    $result = date("d-m-Y H:i:s", strtotime($unicharm_member->created_at));
+                } else {
+                    $result = NULL;
+                }
+
+                return $result;
+            })
+            ->make(true);
 
         return $datatables;
     }
