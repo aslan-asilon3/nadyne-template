@@ -7,13 +7,15 @@ use Auth;
 use DB;
 use DataTables;
 use App\Models\UnicharmMember;
+use App\Models\DataSales;
 use Rap2hpoutre\FastExcel\FastExcel;
 class DataMemberController extends Controller
 {
     function index()
     {
+        $list_batch = DataSales::getBatch();
         $user = Auth::user();
-        return view('data_member_index', compact('user'));
+        return view('data_member_index', compact('user', 'list_batch'));
     }
 
     public function ajax(Request $request)
