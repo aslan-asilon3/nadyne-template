@@ -99,10 +99,10 @@ $(document).ready(function() {
         processing: true,
         ordering: false,
         serverSide: true,
-        searching: false,
+        searching: true,
         ajax: {
             url: "{{ route('ajax-data-sales') }}",
-            type: 'GET',
+            type: 'POST',
             data: function (d) {
                 d.batch         = $('#batch').val();
                 d.poin          = $('#poin').val();
@@ -129,18 +129,11 @@ $(document).ready(function() {
             { "data": "recipient", "name": "recipient" },
             { "data": "created_at", "name" : "created_at" },
         ],
-        "columnDefs": [
-
-        ],
         "pageLength": 50,
         'lengthMenu': [
             [ 10, 50, 100, 300, 400 ],
             [ '10 rows', '50 rows', '100 rows', '300 rows', '400 rows']
-        ],
-        "dom": 'lBfrtip',
-        "buttons": [
-
-        ],
+        ]
     });
 
     $('#submit-filter').on('click',function (e) {

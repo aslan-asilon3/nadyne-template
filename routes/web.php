@@ -27,7 +27,7 @@ Auth::routes([
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/data-sales', 'DataSalesController@index')->name('data-sales.index');
-    Route::get('/ajax/data-sales', 'DataSalesController@ajax')->name('ajax-data-sales');
+    Route::post('/ajax/data-sales', 'DataSalesController@ajax')->name('ajax-data-sales');
     Route::post('/data-sales/export-excel', 'DataSalesController@exportExcel')->name('export-excel-data-sales');
     Route::get('/data-sales/action-excel/{filename}', 'DataSalesController@actionDownloadExcel')->name('action-excel-data-sales');
     Route::get('/data-member', 'DataMemberController@index')->name('data-member.index');
@@ -35,7 +35,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/data-member/export-excel', 'DataMemberController@exportExcel')->name('export-excel-data-member');
     Route::get('/data-member/action-excel/{filename}', 'DataMemberController@actionDownloadExcel')->name('action-excel-data-member');
     Route::get('/akumulasi-poin', 'AkumulasiPoinController@index')->name('akumulasi-poin.index');
-    Route::get('/ajax/akumulasi-poin', 'AkumulasiPoinController@ajax')->name('ajax-akumulasi-poin');
+    Route::post('/ajax/akumulasi-poin', 'AkumulasiPoinController@ajax')->name('ajax-akumulasi-poin');
     Route::post('/akumulasi-poin/export-excel', 'AkumulasiPoinController@exportExcel')->name('export-excel-akumulasi-poin');
     Route::get('/akumulasi-poin/action-excel/{filename}', 'AkumulasiPoinController@actionDownloadExcel')->name('action-excel-akumulasi-poin');
 });

@@ -90,7 +90,7 @@ $(document).ready(function() {
             searching: false,
             ajax: {
                 url: "{{ route('ajax-akumulasi-poin') }}",
-                type: 'GET',
+                type: 'POST',
                 data: function (d) {
                     d.id_member     = $('#id_member').val();
                     d.no_hp         = $('#no_hp').val();
