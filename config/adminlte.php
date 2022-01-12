@@ -249,7 +249,7 @@ return [
             'icon' => 'fas fa-fw fa-list',
         ],
         [
-            'text' => 'Akumulasi Poin Per-Batch',
+            'text' => 'Akumulasi Poin',
             'url'  => 'akumulasi-poin',
             'icon' => 'fas fa-fw fa-list',
         ],
