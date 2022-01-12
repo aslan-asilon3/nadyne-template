@@ -22,6 +22,7 @@ class UnicharmMember extends Model
 
                 return $result;
             })
+            ->orderColumns(['id_member', 'no_hp'], '-:column $1')
             ->make(true);
 
         return $datatables;

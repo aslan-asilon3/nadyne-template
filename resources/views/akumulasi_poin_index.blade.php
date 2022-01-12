@@ -85,7 +85,7 @@ $(document).ready(function() {
 
         var tabel = $('#akumulasi_poin_table').DataTable({
             processing: true,
-            ordering: false,
+            ordering: true,
             serverSide: true,
             searching: false,
             ajax: {

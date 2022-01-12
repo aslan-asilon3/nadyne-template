@@ -65,7 +65,7 @@
 </div>
 @stop
 @section('custom_js')
-<script type="text/javascript" src="{{ asset('vendor/datatables/FixedHeader-3.1.7/js/dataTables.fixedHeader.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/datatables/FixedHeader-3.2.1/js/dataTables.fixedHeader.js') }}"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 
@@ -77,7 +77,7 @@ $(document).ready(function() {
 
     var tabel = $('#data_member_table').DataTable({
         processing: true,
-        ordering: false,
+        ordering: true,
         serverSide: true,
         searching: false,
         ajax: {

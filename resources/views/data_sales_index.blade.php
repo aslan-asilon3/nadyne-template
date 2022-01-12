@@ -99,7 +99,7 @@ $(document).ready(function() {
 
     var tabel = $('#data_sales_table').DataTable({
         processing: true,
-        ordering: false,
+        ordering: true,
         serverSide: true,
         searching: false,
         ajax: {
