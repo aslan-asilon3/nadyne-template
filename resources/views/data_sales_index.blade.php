@@ -76,7 +76,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button id="submit" class="btn btn-primary btn-flat">Submit</button>
+                    <button id="submit-filter" class="btn btn-primary btn-flat">Submit</button>
                 </div>
             </div>
         </form>
