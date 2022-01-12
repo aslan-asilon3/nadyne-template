@@ -94,12 +94,11 @@ $(document).ready(function() {
         }
     });
 
-    var tabel = $('#data_sales_table');
-    tabel.DataTable({
+    var tabel = $('#data_sales_table').DataTable({
         processing: true,
         ordering: false,
         serverSide: true,
-        searching: true,
+        searching: false,
         ajax: {
             url: "{{ route('ajax-data-sales') }}",
             type: 'POST',
@@ -113,8 +112,8 @@ $(document).ready(function() {
                 d.created_at    = $('#created_at').val();
             }
         },
-        "deferRender": true,
-        "columns": [
+        deferRender: true,
+        columns: [
             { "data": "id", "name": "id",
                 render: function (data, type, row, meta) {
                     return meta.row + meta.settings._iDisplayStart + 1;
@@ -129,8 +128,8 @@ $(document).ready(function() {
             { "data": "recipient", "name": "recipient" },
             { "data": "created_at", "name" : "created_at" },
         ],
-        "pageLength": 50,
-        'lengthMenu': [
+        pageLength: 50,
+        lengthMenu: [
             [ 10, 50, 100, 300, 400 ],
             [ '10 rows', '50 rows', '100 rows', '300 rows', '400 rows']
         ]

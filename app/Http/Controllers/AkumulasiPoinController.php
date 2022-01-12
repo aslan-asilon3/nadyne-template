@@ -44,7 +44,6 @@ class AkumulasiPoinController extends Controller
     public function exportExcel(Request $request)
     {
         $akumulasi_poin = AkumulasiPoin::select('id', 'id_member', 'no_hp', 'batch', 'poin', 'created_at');
-        $akumulasi_poin->orderBy('id', 'ASC');
 
         if (!empty($request->no_hp)) {
             $akumulasi_poin->where('no_hp', $request->no_hp);
@@ -57,6 +56,8 @@ class AkumulasiPoinController extends Controller
         if (!empty($request->poin)) {
             $akumulasi_poin->where('poin', $request->poin);
         }
+
+        $akumulasi_poin->orderBy('id', 'ASC');
 
         $content = $akumulasi_poin->get();
 

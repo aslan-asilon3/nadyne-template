@@ -112,8 +112,8 @@ $(document).ready(function() {
                 { "data": "poin", "name" : "poin" },
                 { "data": "created_at", "name" : "created_at" },
             ],
-            "pageLength": 50,
-            'lengthMenu': [
+            pageLength: 50,
+            lengthMenu: [
                 [ 10, 50, 100, 300, 400 ],
                 [ '10 rows', '50 rows', '100 rows', '300 rows', '400 rows']
             ]
