@@ -1,0 +1,7 @@
+# Ignore everything
+*
+# Ignore subfolder
+*/
+# Ignore except this file
+!.gitignore
+!index.html
