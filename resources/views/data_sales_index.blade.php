@@ -52,6 +52,9 @@
                 <div class="modal-body">
                     <div class="row">
                                 <div class="col-md-6">
+                                    <label for="id_member">ID Member</label>
+                                    <input type="tel" name="id_member" id="id_member" class="form-control mb-2" />
+
                                     <label for="no_hp">Nomer HP</label>
                                     <input type="tel" name="no_hp" id="no_hp" class="form-control mb-2" />
 
@@ -103,6 +106,7 @@ $(document).ready(function() {
             url: "{{ route('ajax-data-sales') }}",
             type: 'POST',
             data: function (d) {
+                d.id_member     = $('#id_member').val();
                 d.batch         = $('#batch').val();
                 d.poin          = $('#poin').val();
                 d.no_hp         = $('#no_hp').val();
@@ -178,7 +182,8 @@ $(document).ready(function() {
                 poin: poin,
                 batch: batch,
                 recipient: recipient,
-                source: source
+                source: source,
+                created_at: created_at
             },
             success: function (result) {
                 console.log(result);
