@@ -22,7 +22,7 @@ class DataSalesController extends Controller
     {
         $data_sales = DataSales::select('id', 'id_member', 'batch', 'poin', 'no_hp', 'tanggal', 'source', 'recipient', 'created_at');
 
-        if (!empty($request->is_member)) {
+        if ($request->is_member) {
             if ($request->is_member == '1') {
                 $data_sales->whereNotNull('id_member');
             } else {
@@ -60,7 +60,7 @@ class DataSalesController extends Controller
     {
         $data_sales = DataSales::select('id', 'id_member', 'batch', 'poin', 'no_hp', 'tanggal', 'source', 'recipient', 'created_at');
 
-        if (!empty($request->is_member)) {
+        if ($request->is_member) {
             if ($request->is_member == '1') {
                 $data_sales->whereNotNull('id_member');
             } else {
