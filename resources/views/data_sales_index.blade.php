@@ -52,8 +52,9 @@
                 <div class="modal-body">
                     <div class="row">
                                 <div class="col-md-6">
+
                                     <label for="desc_info">Membership Status</label>
-                                    <select class="form-control" name="batch" id="batch">
+                                    <select class="form-control mb-2" name="is_member" id="is_member">
                                         <option value="">-- Select Membership --</option>
                                         <option value="1">Member</option>
                                         <option value="0">Non Member</option>
@@ -171,6 +172,7 @@ $(document).ready(function() {
         var batch           = $('#batch').val();
         var recipient       = $('#recipient').val();
         var source          = $('#source').val();
+        var is_member       = $('#is_member').val();
 
         var download_url    = "{{ url('data-sales/action-excel') }}";
 
@@ -189,7 +191,8 @@ $(document).ready(function() {
                 poin: poin,
                 batch: batch,
                 recipient: recipient,
-                source: source
+                source: source,
+                is_member: is_member
             },
             success: function (result) {
                 console.log(result);
