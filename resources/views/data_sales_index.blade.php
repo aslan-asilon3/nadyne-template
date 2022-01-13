@@ -121,6 +121,7 @@ $(document).ready(function() {
                 d.tanggal       = $('#tanggal').val();
                 d.source        = $('#source').val();
                 d.recipient     = $('#recipient').val();
+                d.is_member     = $('#is_member').val();
             }
         },
         deferRender: true,
