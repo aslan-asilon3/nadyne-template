@@ -52,6 +52,13 @@
                 <div class="modal-body">
                     <div class="row">
                                 <div class="col-md-6">
+                                    <label for="desc_info">Membership Status</label>
+                                    <select class="form-control" name="batch" id="batch">
+                                        <option value="">-- Select Membership --</option>
+                                        <option value="1">Member</option>
+                                        <option value="0">Non Member</option>
+                                    </select>
+
                                     <label for="id_member">ID Member</label>
                                     <input type="tel" name="id_member" id="id_member" class="form-control mb-2" />
 
