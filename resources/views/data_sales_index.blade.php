@@ -113,7 +113,6 @@ $(document).ready(function() {
                 d.tanggal       = $('#tanggal').val();
                 d.source        = $('#source').val();
                 d.recipient     = $('#recipient').val();
-                d.created_at    = $('#created_at').val();
             }
         },
         deferRender: true,
@@ -165,6 +164,7 @@ $(document).ready(function() {
         var batch           = $('#batch').val();
         var recipient       = $('#recipient').val();
         var source          = $('#source').val();
+
         var download_url    = "{{ url('data-sales/action-excel') }}";
 
         $.ajaxSetup({
@@ -182,8 +182,7 @@ $(document).ready(function() {
                 poin: poin,
                 batch: batch,
                 recipient: recipient,
-                source: source,
-                created_at: created_at
+                source: source
             },
             success: function (result) {
                 console.log(result);
