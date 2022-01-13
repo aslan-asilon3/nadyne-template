@@ -30,6 +30,6 @@ class DataSales extends Model
 
     public static function getBatch()
     {
-        return DataSales::select('batch')->groupBy('batch')->get();
+        return DataSales::select('batch')->groupBy('batch')->orderBy('batch', 'asc')->get();
     }
 }
