@@ -65,12 +65,10 @@ class DataSalesController extends Controller
     {
         $data_sales = DataSales::select('id', 'id_member', 'batch', 'poin', 'no_hp', 'tanggal', 'source', 'recipient', 'created_at');
 
-        if ($request->is_member) {
-            if ($request->is_member == '1') {
-                $data_sales->whereNotNull('id_member');
-            } else {
-                $data_sales->whereNull('id_member');
-            }
+        if ($request->is_member == '1') {
+            $data_sales->whereNotNull('id_member');
+        } elseif ($request->is_member == '0') {
+            $data_sales->whereNull('id_member');
         }
 
         if (!empty($request->no_hp)) {
