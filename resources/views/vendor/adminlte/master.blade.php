@@ -87,6 +87,11 @@
         .brand-link {
             font-size: 1.17rem !important;
         }
+        .form-control {
+            font-size: .9rem;
+            font-weight: 400;
+            line-height: 1rem;
+        }
       </style>
 </head>
 
