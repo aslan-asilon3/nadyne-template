@@ -20,6 +20,7 @@ class DataSalesController extends Controller
 
     public function ajax(Request $request)
     {
+        DB::enableQueryLog(); // Enable query log
         $data_sales = DataSales::select('id', 'id_member', 'batch', 'poin', 'no_hp', 'tanggal', 'source', 'recipient', 'created_at');
 
         if ($request->is_member) {
@@ -52,6 +53,9 @@ class DataSalesController extends Controller
 
         $data_sales->orderBy('id', 'ASC');
         $datatables = DataSales::datatables($data_sales);
+
+        \Log::info('Query Data Sales');
+        \Log::info(DB::getQueryLog());
 
         return $datatables;
     }
