@@ -92,7 +92,7 @@
             font-weight: 400;
             line-height: 1rem;
         }
-      </style>
+    </style>
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>

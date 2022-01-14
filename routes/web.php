@@ -23,6 +23,7 @@ Auth::routes([
     "register" => false
 ]);
 
+Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
