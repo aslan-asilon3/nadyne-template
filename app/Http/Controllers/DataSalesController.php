@@ -23,17 +23,14 @@ class DataSalesController extends Controller
         DB::enableQueryLog(); // Enable query log
         $data_sales = DataSales::select('id', 'id_member', 'batch', 'poin', 'no_hp', 'tanggal', 'source', 'recipient', 'created_at');
 
-        \Log::info('is-member : '.$request->is_member);
-        \Log::info(true == ($request->is_member == '0'));
-        //if ($request->is_member) {
-            \Log::info('#Line 29');
-            if ($request->is_member == '1') {
-                $data_sales->whereNotNull('id_member');
-            } elseif ($request->is_member == '0') {
-                \Log::info('#Line 33');
-                $data_sales->whereNull('id_member');
-            }
-        //}
+        // \Log::info('is-member : '.$request->is_member);
+        // \Log::info(true == ($request->is_member == '0'));
+
+        if ($request->is_member == '1') {
+            $data_sales->whereNotNull('id_member');
+        } elseif ($request->is_member == '0') {
+            $data_sales->whereNull('id_member');
+        }
 
         if (!empty($request->no_hp)) {
             $data_sales->where('no_hp', $request->no_hp);
@@ -58,8 +55,8 @@ class DataSalesController extends Controller
         $data_sales->orderBy('id', 'ASC');
         $datatables = DataSales::datatables($data_sales);
 
-        \Log::info('SQL Ajax data-sales:');
-        \Log::info(DB::getQueryLog());
+        // \Log::info('SQL Ajax data-sales:');
+        // \Log::info(DB::getQueryLog());
 
         return $datatables;
     }
