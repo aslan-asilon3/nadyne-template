@@ -29,6 +29,7 @@ class DataSalesController extends Controller
             if ($request->is_member == '1') {
                 $data_sales->whereNotNull('id_member');
             } elseif ($request->is_member == '0') {
+                \Log::info('Line 32 :');
                 $data_sales->whereNull('id_member');
             }
         }
