@@ -25,7 +25,7 @@ class DataSalesController extends Controller
 
         \Log::info('is-member : '.$request->is_member);
         \Log::info(true == ($request->is_member == '0'));
-        if ($request->is_member) {
+        //if ($request->is_member) {
             \Log::info('#Line 29');
             if ($request->is_member == '1') {
                 $data_sales->whereNotNull('id_member');
@@ -33,7 +33,7 @@ class DataSalesController extends Controller
                 \Log::info('#Line 33');
                 $data_sales->whereNull('id_member');
             }
-        }
+        //}
 
         if (!empty($request->no_hp)) {
             $data_sales->where('no_hp', $request->no_hp);
