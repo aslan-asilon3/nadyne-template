@@ -40,7 +40,7 @@ class CekDataSalesMembership extends Command
     public function handle()
     {
         $data_sales = DataSales::whereNull('status_cek_is_member')
-                ->where('batch','=','2021-08')
+                ->whereIn('batch', ['2021-07','2021-08','2021-09'])
                 ->take(10000)
                 ->get();
 
