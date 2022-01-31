@@ -40,19 +40,26 @@ class CleanNoHP extends Command
     {
         //whereNull('status_cek_is_member')
         $data_sales = DataSales::whereNull('status_cek_poin')
-                ->whereIn('batch', ['2021-07','2021-08','2021-09'])
+                //'2021-07','2021-08','2021-09'
+                ->whereIn('batch', ['2021-23','2021-49'])
                 ->take(10000)
                 ->get();
 
         foreach ($data_sales as $ds) {
             $data_sales = DataSales::find($ds->id);
 
+            $char_rep = array("/", ":", "-", ",", "_", "?", "!", "#", "$", "%");
+            $data_sales->no_hp = str_replace($data_sales->no_hp, "", "Hello World of PHP");
+
             if (substr(trim($ds->no_hp), 0, 2) == '62') {
                 echo '1 : '.substr($data_sales->no_hp, 2). "\n";
                 $data_sales->no_hp = substr($data_sales->no_hp, 2);
+            } else if (substr(trim($ds->no_hp), 0, 4) == '6262'){
+                echo '2 : '.substr($data_sales->no_hp, 4). "\n";
+                $data_sales->no_hp = substr($data_sales->no_hp, 4);
             } else {
                 if (substr(trim($ds->no_hp), 0, 1) == '0') {
-                    echo '2 : '.substr($data_sales->no_hp, 1). "\n";
+                    echo '3 : '.substr($data_sales->no_hp, 1). "\n";
                     $data_sales->no_hp = substr($data_sales->no_hp, 1);
                 }
             }
