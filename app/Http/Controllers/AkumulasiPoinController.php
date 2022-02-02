@@ -61,7 +61,7 @@ class AkumulasiPoinController extends Controller
 
         //$content = $akumulasi_poin->toSql();
         $content = $akumulasi_poin->get();
-        dd($content);
+        //dd($content);
 
         $filename = 'akumulasi-poin-'.date('Y-m-d-H-i');
 
@@ -73,7 +73,7 @@ class AkumulasiPoinController extends Controller
                 'NO_HP'         => $value->no_hp,
                 'BATCH'         => $value->batch,
                 'POIN'          => $value->poin,
-                'CREATED_AT'    => 'X',
+                'CREATED_AT'    => $value->created_at,
             ];
         });
 
