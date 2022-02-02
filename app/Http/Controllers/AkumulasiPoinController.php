@@ -73,7 +73,7 @@ class AkumulasiPoinController extends Controller
                 'NO_HP'         => $value->no_hp,
                 'BATCH'         => $value->batch,
                 'POIN'          => $value->poin,
-                'CREATED_AT'    => $value->created_at,
+                'CREATED_AT'    => date("d-m-Y H:i:s", strtotime($value->created_at)),
             ];
         });
 
