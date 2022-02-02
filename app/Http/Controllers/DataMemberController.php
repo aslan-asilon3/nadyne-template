@@ -61,7 +61,7 @@ class DataMemberController extends Controller
                 'ID'            => $value->id,
                 'ID MEMBER'     => $value->id_member,
                 'NO HP'         => $value->no_hp,
-                'CREATED AT'    => $value->created_at
+                'CREATED AT'    => date("d-m-Y H:i:s", strtotime($value->created_at)),
             ];
         });
 

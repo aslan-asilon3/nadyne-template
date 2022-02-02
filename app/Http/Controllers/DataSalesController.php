@@ -107,7 +107,7 @@ class DataSalesController extends Controller
                 'POIN'          => $value->poin,
                 'RECIPIENT'     => $value->recipient,
                 'SOURCE'        => $value->source,
-                'CREATED AT'    => $value->created_at
+                'CREATED AT'    => date("d-m-Y H:i:s", strtotime($value->created_at)),
             ];
         });
 
