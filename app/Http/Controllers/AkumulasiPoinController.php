@@ -66,12 +66,12 @@ class AkumulasiPoinController extends Controller
         (new FastExcel($content))->export(public_path('export/'.$filename.'.xlsx'), function ($value) {
 
             return [
-                'CREATED_AT'    => 'X',
                 'ID'            => $value->id,
                 'ID_MEMBER'     => $value->id_member,
                 'NO_HP'         => $value->no_hp,
                 'BATCH'         => $value->batch,
                 'POIN'          => $value->poin,
+                'CREATED_AT'    => 'X',
             ];
         });
 
