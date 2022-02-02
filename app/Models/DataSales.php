@@ -15,7 +15,7 @@ class DataSales extends Model
         $datatables = Datatables::of($data_sales)
             ->editColumn('created_at', function(DataSales $data_sales) {
 
-                if ($data_sales->created_at) {
+                if (!empty($data_sales->created_at)) {
                     $result = date("d-m-Y H:i:s", strtotime($data_sales->created_at));
                 } else {
                     $result = NULL;
