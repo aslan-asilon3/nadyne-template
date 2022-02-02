@@ -44,12 +44,15 @@ class CleanNoHP extends Command
                 ->whereIn('batch', ['2021-23','2021-49'])
                 ->take(10000)
                 ->get();
+                //->toSql();
+
+        //var_dump($data_sales);exit();
 
         foreach ($data_sales as $ds) {
             $data_sales = DataSales::find($ds->id);
 
             $char_rep = array("/", ":", "-", ",", "_", "?", "!", "#", "$", "%");
-            $data_sales->no_hp = str_replace($data_sales->no_hp, "", "Hello World of PHP");
+            $data_sales->no_hp = str_replace($char_rep, "", $data_sales->no_hp);
 
             if (substr(trim($ds->no_hp), 0, 2) == '62') {
                 echo '1 : '.substr($data_sales->no_hp, 2). "\n";
