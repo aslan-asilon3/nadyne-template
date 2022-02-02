@@ -59,8 +59,8 @@ class AkumulasiPoinController extends Controller
 
         $akumulasi_poin->orderBy('id', 'ASC');
 
-        $content = $akumulasi_poin->toSql();
-        //$content = $akumulasi_poin->get();
+        //$content = $akumulasi_poin->toSql();
+        $content = $akumulasi_poin->get();
         dd($content);
 
         $filename = 'akumulasi-poin-'.date('Y-m-d-H-i');
