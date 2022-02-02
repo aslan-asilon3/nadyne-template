@@ -16,13 +16,13 @@ class AkumulasiPoin extends Model
     {
         $datatables = Datatables::of($akumulasi_poin)
             ->editColumn('created_at', function(AkumulasiPoin $akumulasi_poin) {
-                if (!empty($akumulasi_poin->created_at)) {
-                    $result = date("d-m-Y H:i:s", strtotime($akumulasi_poin->created_at));
-                } else {
-                    $result = NULL;
-                }
+                // if (!empty($akumulasi_poin->created_at)) {
+                //     $result = date("d-m-Y H:i:s", strtotime($akumulasi_poin->created_at));
+                // } else {
+                //     $result = NULL;
+                // }
 
-                return $result;
+                return date("d-m-Y H:i:s", strtotime($akumulasi_poin->created_at));
             })
             ->make(true);
 
