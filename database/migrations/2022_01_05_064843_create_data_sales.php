@@ -19,7 +19,7 @@ class CreateDataSales extends Migration
             $table->string('batch', 20);
             $table->unsignedInteger('poin')->default(0);
             $table->string('no_hp', 20);
-            $table->string('tanggal', 2);
+            $table->string('tanggal', 12);
             $table->string('source', 100);
             $table->string('recipient', 100);
             $table->string('status_member', 1)->nullable();
