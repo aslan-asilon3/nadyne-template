@@ -103,6 +103,7 @@ class DataSalesController extends Controller
                 'ID'            => $value->id,
                 'ID MEMBER'     => $value->id_member,
                 'NO HP'         => $value->no_hp,
+                'TANGGAL'       => $value->tanggal,
                 'BATCH'         => $value->batch,
                 'POIN'          => $value->poin,
                 'RECIPIENT'     => $value->recipient,
