@@ -16,11 +16,9 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        if(!empty(Auth::user())){
+        if (!empty(Auth::user())) {
             return $next($request);
-        }
-        else
-        {
+        } else {
             return redirect('login');
         }
     }
