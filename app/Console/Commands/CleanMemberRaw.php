@@ -40,8 +40,8 @@ class CleanMemberRaw extends Command
     public function handle()
     {
         $member_raw = UnicharmMemberRaw::whereNull('status_cek_data')
-            ->where('id', '>' , 1402018)
-            ->take(200000)
+            ->where('id', '>' , 1474134)
+            ->take(50000)
             ->get();
 
         foreach ($member_raw as $m) {
