@@ -42,10 +42,10 @@ class CekDataSalesMembership extends Command
         $data_sales = DataSales::whereNull('status_cek_is_member')
                 //'2021-07','2021-08','2021-09'
                 //
-                ->whereIn('batch', ['2022-08'])
+                ->where('batch', '2022-08')
                 ->take(10000)
-                ->toSql();
-        echo $data_sales;
+                ->get();
+
         foreach ($data_sales as $ds) {
             $member = UnicharmMember::where('no_hp', trim($ds->no_hp))->first();
             $data_sales = DataSales::find($ds->id);
