@@ -44,8 +44,8 @@ class CekDataSalesMembership extends Command
                 //
                 ->whereIn('batch', ['2022-08'])
                 ->take(10000)
-                ->get();
-
+                ->toSql();
+        echo $data_sales;
         foreach ($data_sales as $ds) {
             $member = UnicharmMember::where('no_hp', trim($ds->no_hp))->first();
             $data_sales = DataSales::find($ds->id);
