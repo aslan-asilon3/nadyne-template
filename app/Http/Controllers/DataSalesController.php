@@ -21,7 +21,7 @@ class DataSalesController extends Controller
     public function ajax(Request $request)
     {
         DB::enableQueryLog(); // Enable query log
-        $data_sales = DataSales::select('id', 'id_member', 'batch', 'poin', 'no_hp', 'tanggal', 'source', 'recipient', 'created_at');
+        $data_sales = DataSales::select('id', 'id_member', 'order_id', 'batch', 'poin', 'no_hp', 'tanggal', 'source', 'recipient', 'created_at');
 
         // \Log::info('is-member : '.$request->is_member);
         // \Log::info(true == ($request->is_member == '0'));
@@ -30,6 +30,10 @@ class DataSalesController extends Controller
             $data_sales->whereNotNull('id_member');
         } elseif ($request->is_member == '0') {
             $data_sales->whereNull('id_member');
+        }
+
+        if (!empty($request->order_id)) {
+            $data_sales->where('order_id', $request->order_id);
         }
 
         if (!empty($request->no_hp)) {

@@ -63,6 +63,9 @@
                                     <label for="id_member">ID Member</label>
                                     <input type="tel" name="id_member" id="id_member" class="form-control mb-2" />
 
+                                    <label for="no_hp">Order ID</label>
+                                    <input type="tel" name="order_id" id="order_id" class="form-control mb-2" />
+
                                     <label for="no_hp">Nomer HP</label>
                                     <input type="tel" name="no_hp" id="no_hp" class="form-control mb-2" />
 
@@ -115,6 +118,7 @@ $(document).ready(function() {
             type: 'POST',
             data: function (d) {
                 d.id_member     = $('#id_member').val();
+                d.order_id      = $('#order_id').val();
                 d.batch         = $('#batch').val();
                 d.poin          = $('#poin').val();
                 d.no_hp         = $('#no_hp').val();
@@ -132,6 +136,7 @@ $(document).ready(function() {
                 }
             },
             { "data": "id_member", "name": "id_member" },
+            { "data": "order_id", "name": "order_id" },
             { "data": "batch", "name": "batch" },
             { "data": "poin", "name" : "poin" },
             { "data": "no_hp", "name" : "no_hp" },
@@ -168,6 +173,7 @@ $(document).ready(function() {
 
     $('#export_excel').on('click',function () {
         var id_member       = $('#id_member').val();
+        var order_id        = $('#order_id').val();
         var no_hp           = $('#no_hp').val();
         var poin            = $('#poin').val();
         var batch           = $('#batch').val();
