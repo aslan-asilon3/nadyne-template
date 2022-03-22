@@ -67,12 +67,16 @@ class DataSalesController extends Controller
 
     public function exportExcel(Request $request)
     {
-        $data_sales = DataSales::select('id', 'id_member', 'batch', 'poin', 'no_hp', 'tanggal', 'source', 'recipient', 'created_at');
+        $data_sales = DataSales::select('id', 'id_member', 'order_id', 'batch', 'poin', 'no_hp', 'tanggal', 'source', 'recipient', 'created_at');
 
         if ($request->is_member == '1') {
             $data_sales->whereNotNull('id_member');
         } elseif ($request->is_member == '0') {
             $data_sales->whereNull('id_member');
+        }
+
+        if (!empty($request->order_id)) {
+            $data_sales->where('order_id', $request->order_id);
         }
 
         if (!empty($request->no_hp)) {
@@ -106,6 +110,7 @@ class DataSalesController extends Controller
             return [
                 'ID'            => $value->id,
                 'ID MEMBER'     => $value->id_member,
+                'ORDER ID'      => $value->order_id,
                 'NO HP'         => $value->no_hp,
                 'TANGGAL'       => $value->tanggal,
                 'BATCH'         => $value->batch,
