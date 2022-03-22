@@ -25,6 +25,7 @@
                 <tr>
                     <th class="text-center">No</th>
                     <th class="text-center">ID Member</th>
+                    <th class="text-center">Order ID</th>
                     <th class="text-center">Batch</th>
                     <th class="text-center">Poin</th>
                     <th class="text-center">No HP</th>
