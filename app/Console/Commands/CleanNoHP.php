@@ -41,7 +41,7 @@ class CleanNoHP extends Command
         //whereNull('status_cek_is_member')
         $data_sales = DataSales::whereNull('status_cek_poin')
                 //'2021-07','2021-08','2021-09'
-                ->whereIn('batch', ['2022-09'])
+                ->whereIn('batch', ['2022-10'])
                 ->take(10000)
                 ->get();
                 //->toSql();
