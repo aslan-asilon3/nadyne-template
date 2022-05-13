@@ -41,7 +41,7 @@ class CleanNoHP extends Command
         //whereNull('status_cek_is_member')
         $data_sales = DataSales::whereNull('status_cek_poin')
                 //'2021-07','2021-08','2021-09'
-                ->whereIn('batch', ['2022-16'])
+                ->whereIn('batch', ['2022-17'])
                 ->take(10000)
                 ->get();
                 //->toSql();
@@ -51,7 +51,7 @@ class CleanNoHP extends Command
         foreach ($data_sales as $ds) {
             $data_sales = DataSales::find($ds->id);
 
-            $char_rep = array("/", ":", "-", ",", "_", "?", "!", "#", "$", "%");
+            $char_rep = array("/", "+", ":", "-", ",", "_", "?", "!", "#", "$", "%");
             $data_sales->no_hp = str_replace($char_rep, "", $data_sales->no_hp);
 
             if (substr(trim($ds->no_hp), 0, 2) == '62') {

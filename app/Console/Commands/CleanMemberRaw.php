@@ -46,7 +46,7 @@ class CleanMemberRaw extends Command
 
         foreach ($member_raw as $m) {
 
-            $char_rep = array("/", ":", "-", ",", "_", "?", "!", "#", "$", "%");
+            $char_rep = array("/", "+", ":", "-", ",", "_", "?", "!", "#", "$", "%");
             $clean_no_hp = str_replace($char_rep, "", $m->no_hp);
 
             if (substr(trim($clean_no_hp), 0, 2) == '62') {
