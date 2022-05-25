@@ -1,4 +1,5 @@
 # https://laracasts.com/discuss/channels/servers/urls-only-work-when-indexphp-is-used
+# konfigurasi .htaccess untuk web server Apache2
 DirectoryIndex index.php
 
 <IfModule mod_rewrite.c>
