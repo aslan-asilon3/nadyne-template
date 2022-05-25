@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('test/cek-member-data', 'TestController@cekMemberRaw');
+Route::get('/test/cek-member-data', 'TestController@cekMemberRaw');
 
 Auth::routes([
     "register" => false
