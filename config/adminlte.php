@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'logo' => '<b>Unich</b>Arm',
+    'logo' => '<b>Unich</b>arm',
     'logo_img' => '',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
