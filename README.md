@@ -13,7 +13,7 @@ $ cd unicharm-olah-data-2021
 
 ## Install dependencies
 $ npm install  && npm run dev
-@
+
 ## Run the app
 $ php artisan serve
 ```
