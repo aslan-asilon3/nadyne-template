@@ -68,6 +68,13 @@ class DataMemberController extends Controller
         return $filename;
     }
 
+    public function importexcel()
+    {
+        Excel::import(new SalesImport,request()->file('file'));
+             
+        return back();
+    }
+
     public function actionDownloadExcel($file_name)
     {
         return response()->download(public_path('export/'.$file_name.'.xlsx'));
