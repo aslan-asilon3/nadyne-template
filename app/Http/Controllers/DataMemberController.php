@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
-use DB;
+// use DB;
 use DataTables;
 use App\Models\UnicharmMember;
 use App\Models\DataSales;
 use Rap2hpoutre\FastExcel\FastExcel;
+use App\Imports\ImportUnicharmMember;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
 class DataMemberController extends Controller
 {
     function index()
@@ -66,6 +69,25 @@ class DataMemberController extends Controller
         });
 
         return $filename;
+    }
+
+    public function importexcel(Request $request)
+    {
+        
+        // Excel::import(new ImportUnicharmMember,request()->file('file'));
+  
+        
+        $request->validate([
+                'file' => 'required|max:10000|mimes:xlsx,xls',
+            ]);
+            
+            $path = $request->file('file');
+
+            
+    
+
+        Excel::import(new ImportUnicharmMember, $path);       
+        return back();
     }
 
     public function actionDownloadExcel($file_name)

@@ -24,7 +24,7 @@ Route::get('/', function () {
 Route::get('/test/cek-member-data', 'TestController@cekMemberRaw');
 
 Auth::routes([
-    "register" => false
+    "register" => true
 ]);
 
 Route::group(['middleware' => 'admin'], function () {
@@ -35,11 +35,14 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/ajax/data-sales', 'DataSalesController@ajax')->name('ajax-data-sales');
     Route::post('/data-sales/export-excel', 'DataSalesController@exportExcel')->name('export-excel-data-sales');
     Route::get('/data-sales/action-excel/{filename}', 'DataSalesController@actionDownloadExcel')->name('action-excel-data-sales');
+    Route::post('/data-sales/import-excel', 'DataSalesController@importExcel')->name('import-excel-data-sales');
 
     Route::get('/data-member', 'DataMemberController@index')->name('data-member.index');
     Route::post('/ajax/data-member', 'DataMemberController@ajax')->name('ajax-data-member');
     Route::post('/data-member/export-excel', 'DataMemberController@exportExcel')->name('export-excel-data-member');
     Route::get('/data-member/action-excel/{filename}', 'DataMemberController@actionDownloadExcel')->name('action-excel-data-member');
+    Route::post('/data-member/import-excel', 'DataMemberController@importExcel')->name('import-excel-data-member');
+    // Route::post('import', [HomeController::class, 'import'])->name('import');
 
     Route::get('/akumulasi-poin', 'AkumulasiPoinController@index')->name('akumulasi-poin.index');
     Route::post('/ajax/akumulasi-poin', 'AkumulasiPoinController@ajax')->name('ajax-akumulasi-poin');
