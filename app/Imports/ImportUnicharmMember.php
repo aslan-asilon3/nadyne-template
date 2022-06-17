@@ -15,7 +15,8 @@ class ImportUnicharmMember implements ToModel
     public function model(array $row)
     {
         return new UnicharmMember([
-            'id_member' => $row[0],
+            'id' => $row[0],
+            'id_member' => $row[2],
             'no_hp' => $row[1],
         ]);
     }

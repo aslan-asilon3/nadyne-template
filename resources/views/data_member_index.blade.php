@@ -12,12 +12,12 @@
 <div class="card">
     <div class="card-body">
         <div class="row mt-3">
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="/data-member/import-excel" method="GET" enctype="multipart/form-data">
                 @csrf
                 <input type="file" name="file" class="form-control">
                 <br>
 
-                <button type="button" class="btn btn-primary btn-flat" id="filter-show"><i class="fas fa-search"></i> Filter</button>
+                <a type="text" class="btn btn-primary btn-flat" id="filter-show"><i class="fas fa-search"></i> Filter</a>
                 <button class="btn btn-success"><i class="fas fa-download"></i>Import User Data</button>
                 <a type="text" id="export_excel" class="btn btn-warning btn-flat"><i class="fas fa-upload"></i> Export Excel</a>
                 {{-- <a class="btn btn-warning" href="{{ route('export') }}">Export User Data</a> --}}

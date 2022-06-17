@@ -8,6 +8,9 @@ use Auth;
 use DB;
 use DataTables;
 use Rap2hpoutre\FastExcel\FastExcel;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\ImportDataSales;
+use Carbon\Carbon;
 
 class DataSalesController extends Controller
 {
@@ -122,6 +125,21 @@ class DataSalesController extends Controller
         });
 
         return $filename;
+    }
+
+
+    public function importexcel(Request $request)
+    {   
+        $request->validate([
+                'file' => 'required|max:10000|mimes:xlsx,xls',
+            ]);
+            
+        $path = $request->file('file');
+
+        Excel::import(new ImportDataSales, $path); 
+        
+        
+        return back();
     }
 
     public function actionDownloadExcel($file_name)
