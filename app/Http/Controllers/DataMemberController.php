@@ -81,7 +81,7 @@ class DataMemberController extends Controller
                 'file' => 'required|max:10000|mimes:xlsx,xls',
             ]);
             
-            $path = $request->file('file');
+        $path = $request->file('file');
 
             
     

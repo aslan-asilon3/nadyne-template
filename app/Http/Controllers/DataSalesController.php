@@ -135,8 +135,8 @@ class DataSalesController extends Controller
             ]);
             
         $path = $request->file('file');
-
-        Excel::import(new ImportDataSales, $path); 
+       
+     Excel::import(new ImportDataSales, $path); 
         
         
         return back();
