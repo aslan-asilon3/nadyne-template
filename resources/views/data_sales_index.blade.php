@@ -18,7 +18,7 @@
                 <br>
                 <a type="text" class="btn btn-primary btn-flat" id="filter-show"><i class="fas fa-search"></i> Filter</a>
                 <button class="btn btn-success" type="submit"><i class="fas fa-download"></i>Import User Data</button>
-                <a type="text" id="export_excel" class="btn btn-success btn-flat"><i class="fas fa-download"></i> Export Excel</a>
+                <a type="text" id="export_excel" class="btn btn-warning btn-flat"><i class="fas fa-download"></i> Export Excel</a>
                 {{-- <a class="btn btn-warning" href="{{ route('export') }}">Export User Data</a> --}}
             </form>
         </div>
@@ -30,6 +30,25 @@
             </div>
         </div>
         <div class="mb-3"></div>
+
+        <br />
+        @if(count($errors) > 0)
+         <div class="alert alert-danger">
+          Upload Validation Error<br><br>
+          <ul>
+           @foreach($errors->all() as $error)
+           <li>{{ $error }}</li>
+           @endforeach
+          </ul>
+         </div>
+        @endif
+
+        @if($message = Session::get('success'))
+        <div class="alert alert-success alert-block">
+         <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+        </div>
+        @endif
 
         <table class="table table-bordered" id="data_sales_table" style="width:100%;">
             <thead class="thead-light text-primary">

@@ -87,6 +87,10 @@ class DataMemberController extends Controller
     
 
         Excel::import(new ImportUnicharmMember, $path);       
+
+
+
+
         return back();
     }
 

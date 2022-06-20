@@ -39,12 +39,18 @@
         }
     },
     "autoload": {
-        "psr-4": {
-            "App\\": "app/"
-        },
         "classmap": [
             "database/seeds",
             "database/factories"
+        ],
+
+        "psr-4": {
+            "App\\": "app/"
+        },
+        "files": [
+  
+         "app/Helpers/CleanNoHP.php"
+  
         ]
     },
     "autoload-dev": {

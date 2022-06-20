@@ -11,7 +11,7 @@
 @section('content')
 <div class="card">
     <div class="card-body">
-        <div class="row">
+        <div class="row mt-3">
             <div class="col-12">
                 <button type="button" class="btn btn-primary btn-flat" id="filter-show"><i class="fas fa-search"></i> Filter</button>
                 <button type="button" class="btn btn-secondary btn-reset btn-flat" id="reset" style="display:none"><i class="fas fa-sync"></i> Reset</button>

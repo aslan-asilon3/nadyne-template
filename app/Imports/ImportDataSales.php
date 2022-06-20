@@ -5,13 +5,48 @@ namespace App\Imports;
 use App\Models\DataSales;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
+use App\Helpers\CleanNoHP;
+
+// // =================
+// use Illuminate\Contracts\Queue\ShouldQueue;
+// use Illuminate\Support\Collection;
+// use Illuminate\Support\Facades\Hash;
+// use Maatwebsite\Excel\Concerns\Importable;
+// use Maatwebsite\Excel\Concerns\RegistersEventListeners;
+// use Maatwebsite\Excel\Concerns\SkipsErrors;
+// use Maatwebsite\Excel\Concerns\SkipsFailures;
+// use Maatwebsite\Excel\Concerns\SkipsOnError;
+// use Maatwebsite\Excel\Concerns\SkipsOnFailure;
+// use Maatwebsite\Excel\Concerns\ToCollection;
+// // use Maatwebsite\Excel\Concerns\ToModel;
+// use Maatwebsite\Excel\Concerns\WithBatchInserts;
+// use Maatwebsite\Excel\Concerns\WithChunkReading;
+// use Maatwebsite\Excel\Concerns\WithEvents;
+// use Maatwebsite\Excel\Concerns\WithHeadingRow;
+// use Maatwebsite\Excel\Concerns\WithValidation;
+// use Maatwebsite\Excel\Events\AfterImport;
+// use Maatwebsite\Excel\Validators\Failure;
+// use Throwable;
+
+// =================
+
 class ImportDataSales implements ToModel, WithStartRow
+
+// // ==============
+// ToCollection,
+// WithHeadingRow,
+// SkipsOnError,
+// WithValidation,
+// SkipsOnFailure,
+// WithChunkReading,
+// ShouldQueue,
+// WithEvents
+
 {
-    /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
+
+    use CleanNoHP;
+
+
     public function model(array $row)
     {
         // dd($row);
@@ -19,7 +54,7 @@ class ImportDataSales implements ToModel, WithStartRow
             //
             'id_member' => $row[1],
             'order_id' => $row[2],
-            'no_hp' => $row[3],
+            'no_hp' => $this->cek($row[3]),
             'tanggal' => $row[4],
             'batch' => $row[5],
             'poin' => $row[6],
@@ -35,4 +70,6 @@ class ImportDataSales implements ToModel, WithStartRow
     {
         return 2;
     }
+
+
 }
