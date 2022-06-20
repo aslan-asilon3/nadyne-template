@@ -16,7 +16,8 @@ class DataMemberController extends Controller
 {
     function index()
     {
-        $list_batch = DataSales::getBatch();
+        // $list_batch = UnicharmMember::getBatch();
+        $list_batch = UnicharmMember::all();
         $user = Auth::user();
         return view('data_member_index', compact('user', 'list_batch'));
     }

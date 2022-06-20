@@ -253,6 +253,11 @@ return [
             'url'  => 'akumulasi-poin',
             'icon' => 'fas fa-fw fa-list',
         ],
+        [
+            'text' => 'Data Member Raw',
+            'url'  => 'data-member-raw',
+            'icon' => 'fas fa-fw fa-list',
+        ],
     ],
 
     /*
