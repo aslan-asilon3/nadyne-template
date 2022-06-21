@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 use App\Models\DataSales;
+use App\Models\UnicharmMemberRaw;
 Trait CleanNoHP{
 
     function cek($hp)

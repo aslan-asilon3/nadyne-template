@@ -81,10 +81,10 @@
 
 
                                     <label for="id_member">ID Member</label>
-                                    <input type="text" name="id_member" id="id_member" class="form-control mb-2" />
+                                    <input type="tel" name="id_member" id="id_member" class="form-control mb-2" />
 
                                     <label for="no_hp">Nomer HP</label>
-                                    <input type="text" name="no_hp" id="no_hp" class="form-control mb-2" />
+                                    <input type="tel" name="no_hp" id="no_hp" class="form-control mb-2" />
 
                                     <label for="poin">Status Cek Data</label>
                                     <input type="text" name="status_cek_data" id="status_cek_data" class="form-control mb-2" />
@@ -121,8 +121,8 @@ $(document).ready(function() {
             url: "{{ route('ajax-data-member-raw') }}",
             type: 'POST',
             data: function (d) {
-                d.id_member     = $('#id_member').val();
-                d.no_hp         = $('#no_hp').val();
+                d.id_member           = $('#id_member').val();
+                d.no_hp               = $('#no_hp').val();
                 d.status_cek_data     = $('#status_cek_data').val();
             }
         },
@@ -165,8 +165,8 @@ $(document).ready(function() {
     });
 
     $('#export_excel').on('click',function () {
-        var id_member       = $('#id_member').val();
-        var no_hp           = $('#no_hp').val();
+        var id_member           = $('#id_member').val();
+        var no_hp               = $('#no_hp').val();
         var status_cek_data     = $('#status_cek_data').val();
 
         var download_url    = "{{ url('data-member-raw/action-excel') }}";
@@ -194,4 +194,38 @@ $(document).ready(function() {
 
 });
 </script>
+{{-- <script type="text/javascript">
+	var save_method; //for save method string
+	$(document).ready(function() {
+		//datatables
+		var table = $('#table').DataTable({
+			"processing": true,
+			"serverSide": true,
+                        "order": [], //Line ini sudah tidak diperlukan
+			// Load data dari ajax
+			"ajax": {
+				"url": "ajax-data-member-raw",
+				"type": "GET" //(untuk mendapatkan data)
+			},
+			// Tambahkan bagian ini:
+			"columns": [
+                                // Membuat nomor pada datatable (bukan ID user)
+				// {data: 'DT_Row_Index', name:'DT_Row_Index' },
+                                // ID user
+				{data: 'id', name: 'id' },
+				{data: 'id_member', name: 'id_member' },
+                                // nama user
+				{data: 'no_hp', name: 'no_hp' },
+                                // posisi user
+				{data: 'status_cek_data', name: 'status_cek_data'},
+				{data: 'created_at', name: 'created_at'},
+			],
+			//Set column definition initialisation properties.
+			"columnDefs":[
+                                // membuat kolom 0 (No.) dan kolom 1 (ID) tidak dapat di search dan sorting
+				{"searchable": false, "orderable": false, "targets": [0,1]},
+			],
+		})
+	});
+</script> --}}
 @stop

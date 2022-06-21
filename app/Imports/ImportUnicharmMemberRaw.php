@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Models\UnicharmMemberRaw;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
+use App\Helpers\CleanNoHP;
 
 class ImportUnicharmMemberRaw implements ToModel, WithStartRow
 {
@@ -13,12 +14,15 @@ class ImportUnicharmMemberRaw implements ToModel, WithStartRow
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
+
+    use CleanNoHP;
+
     public function model(array $row)
     {
         return new UnicharmMemberRaw([
             // 'id' => $row[0],
             'id_member' => $row[1],
-            'no_hp' => $row[2],
+            'no_hp' => $this->cek($row[2]),
             'status_cek_data' => $row[3],
         ]);
     }

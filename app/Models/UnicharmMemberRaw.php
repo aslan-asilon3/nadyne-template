@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use DataTables;
 class UnicharmMemberRaw extends Model
 {
     use HasFactory;
@@ -14,8 +14,8 @@ class UnicharmMemberRaw extends Model
 
     public static function datatables($data_member_raw)
     {
-        $datatables = Datatables::of($data_member)
-            ->editColumn('created_at', function(UnicharmMember $unicharm_member_raw) {
+        $datatables = Datatables::of($data_member_raw)
+            ->editColumn('created_at', function(UnicharmMemberRaw $unicharm_member_raw) {
                 if (!empty($unicharm_member_raw->created_at)) {
                     $result = date("d-m-Y H:i:s", strtotime($unicharm_member_raw->created_at));
                 } else {
@@ -24,7 +24,7 @@ class UnicharmMemberRaw extends Model
 
                 return $result;
             })
-            ->orderColumns(['id_member', 'no_hp'], '-:column $1')
+            // ->orderColumns(['id_member', 'no_hp'], '-:column $1')
             ->make(true);
 
         return $datatables;

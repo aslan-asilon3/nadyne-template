@@ -21,8 +21,8 @@ class DataSalesController extends Controller
     public function index()
     {
         // $list_batch = DataSales::getBatch();
-        $list_batch = DB::table('unicharm_member_raw')->get();
-        // $user = Auth::user();
+        $list_batch = DB::table('data_sales')->get();
+        $user = Auth::user();
         return view('data_sales_index', compact('user', 'list_batch'));
     }
 
