@@ -25,21 +25,41 @@ class ImportUnicharmMemberRaw implements ToModel, WithStartRow
         $cekUpdate = UnicharmMember::where("no_hp", $this->cek($row[2]))->first();
         // dd($cekUpdate);
 
-        // apabila sudah ada no-hp nya, 
-        // diupdate id-membernya dengan id-member yang terbaru
+        // ========logic 2
         if($cekUpdate){
-            $cekUpdate->id_member= $row[1];
-            $cekUpdate->save();
+            UnicharmMember::create([
+            $cekUpdate->id_member= $row[1],
+            $cekUpdate->save()
+            ]);
+
         }else{
-            
-            // apabila blm ada no-hp nya, 
-             // diinsert ke unicharm_member no-hp & id_member-nya
             return new UnicharmMember([
-            // 'id' => $row[0],
-            'id_member' => $row[1],
-            'no_hp' => $this->cek($row[2]),
-        ]);
+            $cekUpdate->id_member= $row[1],
+            $cekUpdate->save()
+          ]);
         }
+        // ========End logic 2
+
+
+        // // ========logic 1
+
+        // // apabila sudah ada no-hp nya, 
+        // // diupdate id-membernya dengan id-member yang terbaru
+        // if($cekUpdate){
+        //     $cekUpdate->id_member= $row[1];
+        //     $cekUpdate->save();
+        // }else{
+            
+        //     // apabila blm ada no-hp nya, 
+        //      // diinsert ke unicharm_member no-hp & id_member-nya
+        //     return new UnicharmMember([
+        //     // 'id' => $row[0],
+        //     'id_member' => $row[1],
+        //     'no_hp' => $this->cek($row[2]),
+        // ]);
+        // }
+
+        // // ========End logic 1
 
         // return new UnicharmMemberRaw([
         //     // 'id' => $row[0],
