@@ -1,10 +1,10 @@
 @extends('adminlte::page')
 
-@section('title', 'Data Sales')
+@section('title', 'Data Member Raw')
 
 @section('content_header')
     <h3>
-        Data Sales
+        Data Member Raw
     </h3>
 @stop
 
@@ -12,7 +12,7 @@
 <div class="card">
     <div class="card-body">
         <div class="row">
-            <form action="/data-sales/import-excel" method="POST" enctype="multipart/form-data">
+            <form action="/data-member-raw/import-excel" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="file" name="file" class="form-control">
                 <br>
@@ -50,18 +50,13 @@
         </div>
         @endif
 
-        <table class="table table-bordered" id="data_sales_table" style="width:100%;">
+        <table class="table table-bordered" id="data_member_raw_table" style="width:100%;">
             <thead class="thead-light text-primary">
                 <tr>
                     <th class="text-center">No</th>
                     <th class="text-center">ID Member</th>
-                    <th class="text-center">Order ID</th>
-                    <th class="text-center">Batch</th>
-                    <th class="text-center">Poin</th>
                     <th class="text-center">No HP</th>
-                    <th class="text-center">Tanggal</th>
-                    <th class="text-center">Source</th>
-                    <th class="text-center">Recipient</th>
+                    <th class="text-center">Status Cek</th>
                     <th class="text-center">Created At</th>
                 </tr>
             </thead>
@@ -84,38 +79,16 @@
                     <div class="row">
                                 <div class="col-md-6">
 
-                                    <label for="desc_info">Membership Status</label>
-                                    <select class="form-control mb-2" name="is_member" id="is_member">
-                                        <option value="">-- Select Membership --</option>
-                                        <option value="1">Member</option>
-                                        <option value="0">Non Member</option>
-                                    </select>
 
                                     <label for="id_member">ID Member</label>
                                     <input type="tel" name="id_member" id="id_member" class="form-control mb-2" />
 
-                                    <label for="no_hp">Order ID</label>
-                                    <input type="tel" name="order_id" id="order_id" class="form-control mb-2" />
-
                                     <label for="no_hp">Nomer HP</label>
                                     <input type="tel" name="no_hp" id="no_hp" class="form-control mb-2" />
 
-                                    <label for="poin">Poin</label>
-                                    <input type="number" name="poin" id="poin" class="form-control mb-2" />
+                                    <label for="poin">Status Cek Data</label>
+                                    <input type="text" name="status_cek_data" id="status_cek_data" class="form-control mb-2" />
 
-                                    <label for="recipient">Recipient</label>
-                                    <input type="text" name="recipient" id="recipient" class="form-control mb-2" />
-
-                                    <label for="source">Source</label>
-                                    <input type="text" name="source" id="source" class="form-control mb-2" />
-
-                                    <label for="desc_info">Batch</label>
-                                    <select class="form-control" name="batch" id="batch">
-                                        <option value="">-- Select Batch --</option>
-                                        @foreach ($list_batch as $b)
-                                            <option value="{{ $b->batch }}">{{ $b->batch }}</option>
-                                        @endforeach
-                                    </select>
                                 </div>
 
                     </div>
@@ -139,24 +112,18 @@ $(document).ready(function() {
         }
     });
 
-    var tabel = $('#data_sales_table').DataTable({
+    var tabel = $('#data_member_raw_table').DataTable({
         processing: true,
         ordering: true,
         serverSide: true,
         searching: false,
         ajax: {
-            url: "{{ route('ajax-data-sales') }}",
+            url: "{{ route('ajax-data-member-raw') }}",
             type: 'POST',
             data: function (d) {
-                d.id_member     = $('#id_member').val();
-                d.order_id      = $('#order_id').val();
-                d.batch         = $('#batch').val();
-                d.poin          = $('#poin').val();
-                d.no_hp         = $('#no_hp').val();
-                d.tanggal       = $('#tanggal').val();
-                d.source        = $('#source').val();
-                d.recipient     = $('#recipient').val();
-                d.is_member     = $('#is_member').val();
+                d.id_member           = $('#id_member').val();
+                d.no_hp               = $('#no_hp').val();
+                d.status_cek_data     = $('#status_cek_data').val();
             }
         },
         deferRender: true,
@@ -167,13 +134,8 @@ $(document).ready(function() {
                 }
             },
             { "data": "id_member", "name": "id_member" },
-            { "data": "order_id", "name": "order_id" },
-            { "data": "batch", "name": "batch" },
-            { "data": "poin", "name" : "poin" },
             { "data": "no_hp", "name" : "no_hp" },
-            { "data": "tanggal", "name" : "tanggal" },
-            { "data": "source", "name" : "source" },
-            { "data": "recipient", "name": "recipient" },
+            { "data": "status_cek_data", "name": "status_cek_data" },
             { "data": "created_at", "name" : "created_at" },
         ],
         pageLength: 50,
@@ -203,16 +165,11 @@ $(document).ready(function() {
     });
 
     $('#export_excel').on('click',function () {
-        var id_member       = $('#id_member').val();
-        var order_id        = $('#order_id').val();
-        var no_hp           = $('#no_hp').val();
-        var poin            = $('#poin').val();
-        var batch           = $('#batch').val();
-        var recipient       = $('#recipient').val();
-        var source          = $('#source').val();
-        var is_member       = $('#is_member').val();
+        var id_member           = $('#id_member').val();
+        var no_hp               = $('#no_hp').val();
+        var status_cek_data     = $('#status_cek_data').val();
 
-        var download_url    = "{{ url('data-sales/action-excel') }}";
+        var download_url    = "{{ url('data-member-raw/action-excel') }}";
 
         $.ajaxSetup({
             headers: {
@@ -221,16 +178,12 @@ $(document).ready(function() {
         });
 
         jQuery.ajax({
-            url:"{{ url('data-sales/export-excel') }}",
+            url:"{{ url('data-member-raw/export-excel') }}",
             type:"POST",
             data:{
                 id_member : id_member,
                 no_hp : no_hp,
-                poin: poin,
-                batch: batch,
-                recipient: recipient,
-                source: source,
-                is_member: is_member
+                status_cek_data: status_cek_data
             },
             success: function (result) {
                 console.log(result);
@@ -241,4 +194,38 @@ $(document).ready(function() {
 
 });
 </script>
+{{-- <script type="text/javascript">
+	var save_method; //for save method string
+	$(document).ready(function() {
+		//datatables
+		var table = $('#table').DataTable({
+			"processing": true,
+			"serverSide": true,
+                        "order": [], //Line ini sudah tidak diperlukan
+			// Load data dari ajax
+			"ajax": {
+				"url": "ajax-data-member-raw",
+				"type": "GET" //(untuk mendapatkan data)
+			},
+			// Tambahkan bagian ini:
+			"columns": [
+                                // Membuat nomor pada datatable (bukan ID user)
+				// {data: 'DT_Row_Index', name:'DT_Row_Index' },
+                                // ID user
+				{data: 'id', name: 'id' },
+				{data: 'id_member', name: 'id_member' },
+                                // nama user
+				{data: 'no_hp', name: 'no_hp' },
+                                // posisi user
+				{data: 'status_cek_data', name: 'status_cek_data'},
+				{data: 'created_at', name: 'created_at'},
+			],
+			//Set column definition initialisation properties.
+			"columnDefs":[
+                                // membuat kolom 0 (No.) dan kolom 1 (ID) tidak dapat di search dan sorting
+				{"searchable": false, "orderable": false, "targets": [0,1]},
+			],
+		})
+	});
+</script> --}}
 @stop

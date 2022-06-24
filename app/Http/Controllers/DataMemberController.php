@@ -12,11 +12,15 @@ use Rap2hpoutre\FastExcel\FastExcel;
 use App\Imports\ImportUnicharmMember;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
+use App\Helpers\CleanNoHP;
+
 class DataMemberController extends Controller
 {
+    use CleanNoHP;
     function index()
     {
-        $list_batch = DataSales::getBatch();
+        // $list_batch = UnicharmMember::getBatch();
+        $list_batch = UnicharmMember::all();
         $user = Auth::user();
         return view('data_member_index', compact('user', 'list_batch'));
     }
@@ -75,19 +79,26 @@ class DataMemberController extends Controller
     {
         
         // Excel::import(new ImportUnicharmMember,request()->file('file'));
-  
         
+        // $ceksemua =[
+        //     $id_member = "111",
+        //     $hp = "62-853-2860"
+        // ];
+        // return $this->cek($ceksemua);
+
+        // $id_member = 111;
+        // return $this->cek($id_member);
+  
         $request->validate([
                 'file' => 'required|max:10000|mimes:xlsx,xls',
             ]);
             
-            $path = $request->file('file');
+        $path = $request->file('file');
 
-            
-    
 
-        Excel::import(new ImportUnicharmMember, $path);       
-        return back();
+       Excel::import(new ImportUnicharmMember, $path);       
+
+        return back()->with('success', 'Excel Data Imported successfully.');
     }
 
     public function actionDownloadExcel($file_name)

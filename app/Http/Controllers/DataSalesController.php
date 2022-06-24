@@ -5,18 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\DataSales;
 use Auth;
-use DB;
+// use DB;
 use DataTables;
 use Rap2hpoutre\FastExcel\FastExcel;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ImportDataSales;
 use Carbon\Carbon;
+use App\Helpers\CleanNoHP;
+use Illuminate\Support\Facades\DB;
+
 
 class DataSalesController extends Controller
 {
+    use CleanNoHP;
     public function index()
     {
-        $list_batch = DataSales::getBatch();
+        // $list_batch = DataSales::getBatch();
+        $list_batch = DB::table('data_sales')->get();
         $user = Auth::user();
         return view('data_sales_index', compact('user', 'list_batch'));
     }
@@ -129,17 +134,29 @@ class DataSalesController extends Controller
 
 
     public function importexcel(Request $request)
-    {   
+    { 
+        // $hp = "62-853-2860";
+        // return $this->cek($hp);
+
+        // if (!empty($request->hasFile('file'))) {
+        //     // $file = $request->file('file'); //GET FILE
+        //     // Excel::import(new ProductsImport, $path); //IMPORT FILE 
+        //     return redirect()->back()->with(['error'=> 'Empty Data in File Excel']);
+        // }else{
+        //     Excel::import(new ImportDataSales, $path); 
+        //     return back()->with('success', 'Excel Data Imported successfully.');;
+        // }  
+
         $request->validate([
                 'file' => 'required|max:10000|mimes:xlsx,xls',
             ]);
             
         $path = $request->file('file');
 
+       
         Excel::import(new ImportDataSales, $path); 
         
-        
-        return back();
+        return back()->with('success', 'Excel Data Imported successfully.');
     }
 
     public function actionDownloadExcel($file_name)

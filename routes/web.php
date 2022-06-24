@@ -44,6 +44,13 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/data-member/import-excel', 'DataMemberController@importExcel')->name('import-excel-data-member');
     // Route::post('import', [HomeController::class, 'import'])->name('import');
 
+    // =====Data Member Raw
+    Route::get('/data-member-raw', 'DataMemberRawController@index')->name('data-member-raw.index');
+    Route::post('/ajax/data-member-raw', 'DataMemberRawController@ajax')->name('ajax-data-member-raw');
+    Route::post('/data-member-raw/export-excel', 'DataMemberRawController@exportExcel')->name('export-excel-data-member-raw');
+    Route::get('/data-member-raw/action-excel/{filename}', 'DataMemberRawController@actionDownloadExcel')->name('action-excel-data-member-raw');
+    Route::post('/data-member-raw/import-excel', 'DataMemberRawController@importExcel')->name('import-excel-data-member-raw');
+
     Route::get('/akumulasi-poin', 'AkumulasiPoinController@index')->name('akumulasi-poin.index');
     Route::post('/ajax/akumulasi-poin', 'AkumulasiPoinController@ajax')->name('ajax-akumulasi-poin');
     Route::post('/akumulasi-poin/export-excel', 'AkumulasiPoinController@exportExcel')->name('export-excel-akumulasi-poin');
