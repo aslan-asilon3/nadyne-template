@@ -28,13 +28,13 @@ Route::get('test/notifikasi', function () {
     return "Event has been sent!";
 });
 
+Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 
 Auth::routes([
     "register" => true
 ]);
 
 Route::group(['middleware' => 'admin'], function () {
-    Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
     Route::get('/home', 'HomeController@index')->name('home');
 
     Route::get('/data-sales', 'DataSalesController@index')->name('data-sales.index');
