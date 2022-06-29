@@ -23,6 +23,12 @@ Route::get('/', function () {
 
 Route::get('/test/cek-member-data', 'TestController@cekMemberRaw');
 
+Route::get('test/notifikasi', function () {
+    event(new App\Events\StatusLiked('Someone'));
+    return "Event has been sent!";
+});
+
+
 Auth::routes([
     "register" => true
 ]);
