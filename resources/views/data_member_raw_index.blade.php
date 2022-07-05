@@ -18,8 +18,7 @@
                 <br>
                 <a type="text" class="btn btn-primary btn-flat" id="filter-show"><i class="fas fa-search"></i> Filter</a>
                 <button class="btn btn-success" type="submit"><i class="fas fa-download"></i>Import User Data</button>
-                <a type="text" id="export_excel" class="btn btn-warning btn-flat"><i class="fas fa-download"></i> Export Excel</a>
-                {{-- <a class="btn btn-warning" href="{{ route('export') }}">Export User Data</a> --}}
+                <a type="text" href="{{ route('export-unicharm-member-raw') }}" class="btn btn-warning btn-flat"><i class="fas fa-download"></i> Export Excel</a>
             </form>
         </div>
         <div class="row">

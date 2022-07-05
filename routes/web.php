@@ -54,7 +54,8 @@ Route::group(['middleware' => 'admin'], function () {
 
     // =====Data Member Raw
     Route::get('/data-member-raw', 'DataMemberRawController@index')->name('data-member-raw.index');
-    // Route::post('/ajax/data-member-raw', 'DataMemberRawController@ajax')->name('ajax-data-member-raw');
+    Route::get('/data-member-raw/export', 'DataMemberRawController@export')->name('export-unicharm-member-raw');
+    Route::post('/ajax/data-member-raw', 'DataMemberRawController@ajax')->name('ajax-data-member-raw');
     // Route::post('/data-member-raw/export-excel', 'DataMemberRawController@exportExcel')->name('export-excel-data-member-raw');
     // Route::get('/data-member-raw/action-excel/{filename}', 'DataMemberRawController@actionDownloadExcel')->name('action-excel-data-member-raw');
     // Route::post('/data-member-raw/import-excel', 'DataMemberRawController@importExcel')->name('import-excel-data-member-raw');

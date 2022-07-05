@@ -48,35 +48,6 @@ class DataMemberController extends Controller
         return $datatables;
     }
 
-    public function exportExcel(Request $request)
-    {
-        $data_member = UnicharmMember::select('id', 'id_member', 'no_hp', 'created_at');
-
-        if (!empty($request->id_member)) {
-            $data_member->where('id_member', $request->id_member);
-        }
-
-        if (!empty($request->no_hp)) {
-            $data_member->where('no_hp', $request->no_hp);
-        }
-
-        $data_member->orderBy('id', 'ASC');
-        $content = $data_member->get();
-
-        $filename = 'data-member-'.date('Y-m-d-H-i');
-
-        (new FastExcel($content))->export(public_path('export/'.$filename.'.xlsx'), function ($value) {
-
-            return [
-                'ID'            => $value->id,
-                'ID MEMBER'     => $value->id_member,
-                'NO HP'         => $value->no_hp,
-                'CREATED AT'    => date("d-m-Y H:i:s", strtotime($value->created_at)),
-            ];
-        });
-
-        return $filename;
-    }
 
     public function importexcel(Request $request)
     {
@@ -98,8 +69,39 @@ class DataMemberController extends Controller
         return Excel::download(new ExportUnicharmMember, 'data-member ' .now(). '.xlsx');
     }
 
-    public function actionDownloadExcel($file_name)
-    {
-        return response()->download(public_path('export/'.$file_name.'.xlsx'));
-    }
+    // public function actionDownloadExcel($file_name)
+    // {
+    //     return response()->download(public_path('export/'.$file_name.'.xlsx'));
+    // }
+
+        // public function exportExcel(Request $request)
+    // {
+    //     $data_member = UnicharmMember::select('id', 'id_member', 'no_hp', 'created_at');
+
+    //     if (!empty($request->id_member)) {
+    //         $data_member->where('id_member', $request->id_member);
+    //     }
+
+    //     if (!empty($request->no_hp)) {
+    //         $data_member->where('no_hp', $request->no_hp);
+    //     }
+
+    //     $data_member->orderBy('id', 'ASC');
+    //     $content = $data_member->get();
+
+    //     $filename = 'data-member-'.date('Y-m-d-H-i');
+
+    //     (new FastExcel($content))->export(public_path('export/'.$filename.'.xlsx'), function ($value) {
+
+    //         return [
+    //             'ID'            => $value->id,
+    //             'ID MEMBER'     => $value->id_member,
+    //             'NO HP'         => $value->no_hp,
+    //             'CREATED AT'    => date("d-m-Y H:i:s", strtotime($value->created_at)),
+    //         ];
+    //     });
+
+    //     return $filename;
+    // }
+
 }

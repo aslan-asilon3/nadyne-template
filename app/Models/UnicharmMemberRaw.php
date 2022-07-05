@@ -12,6 +12,12 @@ class UnicharmMemberRaw extends Model
     protected $table = 'unicharm_member_raw';
     protected $guarded = [];
 
+    protected $fillable = [
+        'id_member',
+        'no_hp',
+        'status_cek_data',
+    ];
+
     public static function datatables($data_member_raw)
     {
         $datatables = Datatables::of($data_member_raw)

@@ -9,6 +9,7 @@ use App\Models\UnicharmMemberRaw;
 use App\Models\DataSales;
 use Rap2hpoutre\FastExcel\FastExcel;
 use App\Imports\ImportUnicharmMemberRaw;
+use App\Exports\ExportUnicharmMemberRaw;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 use App\Helpers\CleanNoHP;
@@ -24,6 +25,28 @@ class DataMemberRawController extends Controller
         $list_batch = UnicharmMemberRaw::all();
         $user = Auth::user();
         return view('data_member_raw_index', compact('user', 'list_batch'));
+    }
+
+
+    public function importexcel(Request $request)
+    {
+        
+
+        $request->validate([
+            'file' => 'required|max:10000|mimes:xlsx,xls',
+        ]);
+        
+    $path = $request->file('file');
+
+   
+    Excel::import(new ImportUnicharmMemberRaw, $path); 
+    
+    return back()->with('success', 'Excel Data Imported successfully.');
+    }
+
+    public function export() 
+    {
+        return Excel::download(new ExportUnicharmMemberRaw, 'data-member-raw ' .now(). '.xlsx');
     }
 
     public function ajax(Request $request)
@@ -82,70 +105,46 @@ class DataMemberRawController extends Controller
     //     return $datatables;
     // }
 
-    public function exportExcel(Request $request)
-    {
-        $data_member_raw = UnicharmMemberRaw::select('id', 'id_member', 'no_hp','status_cek_data', 'created_at');
 
-        if (!empty($request->id_member)) {
-            $data_member_raw->where('id_member', $request->id_member);
-        }
 
-        if (!empty($request->no_hp)) {
-            $data_member_raw->where('no_hp', $request->no_hp);
-        }
 
-        if (!empty($request->status_cek_data)) {
-            $data_member_raw->where('status_cek_data', $request->status_cek_data);
-        }
+    // public function actionDownloadExcel($file_name)
+    // {
+    //     return response()->download(public_path('export/'.$file_name.'.xlsx'));
+    // }
 
-        $data_member_raw->orderBy('id', 'ASC');
-        $content = $data_member_raw->get();
+        // public function exportExcel(Request $request)
+    // {
+    //     $data_member_raw = UnicharmMemberRaw::select('id', 'id_member', 'no_hp','status_cek_data', 'created_at');
 
-        $filename = 'data-member-raw'.date('Y-m-d-H-i');
+    //     if (!empty($request->id_member)) {
+    //         $data_member_raw->where('id_member', $request->id_member);
+    //     }
 
-        (new FastExcel($content))->export(public_path('export/'.$filename.'.xlsx'), function ($value) {
+    //     if (!empty($request->no_hp)) {
+    //         $data_member_raw->where('no_hp', $request->no_hp);
+    //     }
 
-            return [
-                'ID'               => $value->id,
-                'ID MEMBER'        => $value->id_member,
-                'NO HP'            => $value->no_hp,
-                'STATUS CEK DATA'  => $value->status_cek_data,
-                'CREATED AT'    => date("d-m-Y H:i:s", strtotime($value->created_at)),
-            ];
-        });
+    //     if (!empty($request->status_cek_data)) {
+    //         $data_member_raw->where('status_cek_data', $request->status_cek_data);
+    //     }
 
-        return $filename;
-    }
+    //     $data_member_raw->orderBy('id', 'ASC');
+    //     $content = $data_member_raw->get();
 
-    public function importexcel(Request $request)
-    {
-        
-        // $hp = "62-853-2860";
-        // return $this->cek($hp);
+    //     $filename = 'data-member-raw'.date('Y-m-d-H-i');
 
-        // if (!empty($request->hasFile('file'))) {
-        //     // $file = $request->file('file'); //GET FILE
-        //     // Excel::import(new ProductsImport, $path); //IMPORT FILE 
-        //     return redirect()->back()->with(['error'=> 'Empty Data in File Excel']);
-        // }else{
-        //     Excel::import(new ImportDataSales, $path); 
-        //     return back()->with('success', 'Excel Data Imported successfully.');;
-        // }  
+    //     (new FastExcel($content))->export(public_path('export/'.$filename.'.xlsx'), function ($value) {
 
-        $request->validate([
-            'file' => 'required|max:10000|mimes:xlsx,xls',
-        ]);
-        
-    $path = $request->file('file');
+    //         return [
+    //             'ID'               => $value->id,
+    //             'ID MEMBER'        => $value->id_member,
+    //             'NO HP'            => $value->no_hp,
+    //             'STATUS CEK DATA'  => $value->status_cek_data,
+    //             'CREATED AT'    => date("d-m-Y H:i:s", strtotime($value->created_at)),
+    //         ];
+    //     });
 
-   
-    Excel::import(new ImportUnicharmMemberRaw, $path); 
-    
-    return back()->with('success', 'Excel Data Imported successfully.');
-    }
-
-    public function actionDownloadExcel($file_name)
-    {
-        return response()->download(public_path('export/'.$file_name.'.xlsx'));
-    }
+    //     return $filename;
+    // }
 }
