@@ -77,17 +77,6 @@ class DataMemberController extends Controller
 
     public function importexcel(Request $request)
     {
-        
-        // Excel::import(new ImportUnicharmMember,request()->file('file'));
-        
-        // $ceksemua =[
-        //     $id_member = "111",
-        //     $hp = "62-853-2860"
-        // ];
-        // return $this->cek($ceksemua);
-
-        // $id_member = 111;
-        // return $this->cek($id_member);
   
         $request->validate([
                 'file' => 'required|max:10000|mimes:xlsx,xls',

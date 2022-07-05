@@ -22,31 +22,6 @@ class ImportUnicharmMember implements ToModel, WithStartRow
         ]);
 
 
-        // if (!$cekUpdate) {
-        //     $cekUpdate = new CekUpdateNew;
-        //     $cekUpdate->id_member = $row[1] ?? null;
-        //     $cekUpdate->no_hp = $row[2] ?? null;
-        // }
-
-        // $member = UnicharmMember::where('no_hp')->first();
-
-        // if (!$member) {
-        //     UnicharmMember::create([
-        //         'id_member' => id_member,
-        //         'no_hp' => no_hp,
-        //     ]);
-
-        //     // echo 'create : '.$clean_no_hp. "\n";
-        // } else {
-        //     $member->id_member = id_member;
-        //     $member->no_hp = no_hp;
-        //     $member->save();
-        //     // echo 'update : '.$m->id_member. "\n";
-        // }
-
-        // $member_raw = UnicharmMemberRaw::find($m->id);
-        // $member_raw->status_cek_data = '1';
-        // $member_raw->save();
 
 
     }

@@ -134,18 +134,7 @@ class DataSalesController extends Controller
 
 
     public function importexcel(Request $request)
-    { 
-        // $hp = "62-853-2860";
-        // return $this->cek($hp);
-
-        // if (!empty($request->hasFile('file'))) {
-        //     // $file = $request->file('file'); //GET FILE
-        //     // Excel::import(new ProductsImport, $path); //IMPORT FILE 
-        //     return redirect()->back()->with(['error'=> 'Empty Data in File Excel']);
-        // }else{
-        //     Excel::import(new ImportDataSales, $path); 
-        //     return back()->with('success', 'Excel Data Imported successfully.');;
-        // }  
+    {  
 
         $request->validate([
                 'file' => 'required|max:10000|mimes:xlsx,xls',
