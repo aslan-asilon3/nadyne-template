@@ -41,7 +41,7 @@ class CleanMemberRaw extends Command
     {
         $member_raw = UnicharmMemberRaw::whereNull('status_cek_data')
             //1611150
-            ->where('id', '>' ,1697647)
+            ->where('id', '>' ,1707385)
             ->take(60000)
             ->get();
 
