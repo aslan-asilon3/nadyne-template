@@ -9,18 +9,22 @@
 @stop
 
 @section('content')
+
 <div class="card">
     <div class="card-body">
         <div class="row mt-3">
-            <form action="/data-member/import-excel" method="POST" enctype="multipart/form-data">
+            {{-- <form action="/data-member/import-excel" method="POST" enctype="multipart/form-data"> --}}
+            <form action="" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="file" name="file" class="form-control">
                 <br>
 
                 <a type="text" class="btn btn-primary btn-flat" id="filter-show"><i class="fas fa-search"></i> Filter</a>
                 <button class="btn btn-success" type="submit"><i class="fas fa-download"></i>Import User Data</button>
-                <a type="text" id="export_excel" class="btn btn-warning btn-flat"><i class="fas fa-upload"></i> Export Excel</a>
+                <a type="text"  href="{{ route('export-unicharm-member') }}" class="btn btn-warning btn-flat"><i class="fas fa-upload"></i> Export Excel</a>
+                {{-- <a type="text" id="export_excel" class="btn btn-warning btn-flat"><i class="fas fa-upload"></i> Export Excel</a> --}}
                 {{-- <a class="btn btn-warning" href="{{ route('export') }}">Export User Data</a> --}}
+                {{-- <a class="btn btn-warning" href="">Export User Data</a> --}}
             </form>
 
             <div class="col-12 mt-3">
@@ -50,7 +54,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
-                    </div>
+                    </div> 
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-12">
@@ -72,7 +76,7 @@
             </form>
         </div>
     </div>
-</div>
+</div> 
 @stop
 @section('custom_js')
 <script type="text/javascript" src="{{ asset('vendor/datatables/FixedHeader-3.2.1/js/dataTables.fixedHeader.js') }}"></script>

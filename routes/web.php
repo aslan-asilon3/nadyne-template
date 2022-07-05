@@ -42,20 +42,22 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/data-sales/export-excel', 'DataSalesController@exportExcel')->name('export-excel-data-sales');
     Route::get('/data-sales/action-excel/{filename}', 'DataSalesController@actionDownloadExcel')->name('action-excel-data-sales');
     Route::post('/data-sales/import-excel', 'DataSalesController@importExcel')->name('import-excel-data-sales');
-
+    
+    // =====Data Member 
     Route::get('/data-member', 'DataMemberController@index')->name('data-member.index');
+    Route::get('/data-member/export', 'DataMemberController@export')->name('export-unicharm-member');
     Route::post('/ajax/data-member', 'DataMemberController@ajax')->name('ajax-data-member');
-    Route::post('/data-member/export-excel', 'DataMemberController@exportExcel')->name('export-excel-data-member');
-    Route::get('/data-member/action-excel/{filename}', 'DataMemberController@actionDownloadExcel')->name('action-excel-data-member');
-    Route::post('/data-member/import-excel', 'DataMemberController@importExcel')->name('import-excel-data-member');
+    // Route::post('/data-member/export-excel', 'DataMemberController@exportExcel')->name('export-excel-data-member');
+    // Route::get('/data-member/action-excel/{filename}', 'DataMemberController@actionDownloadExcel')->name('action-excel-data-member');
+    // Route::post('/data-member/import-excel', 'DataMemberController@importExcel')->name('import-excel-data-member');
     // Route::post('import', [HomeController::class, 'import'])->name('import');
 
     // =====Data Member Raw
     Route::get('/data-member-raw', 'DataMemberRawController@index')->name('data-member-raw.index');
-    Route::post('/ajax/data-member-raw', 'DataMemberRawController@ajax')->name('ajax-data-member-raw');
-    Route::post('/data-member-raw/export-excel', 'DataMemberRawController@exportExcel')->name('export-excel-data-member-raw');
-    Route::get('/data-member-raw/action-excel/{filename}', 'DataMemberRawController@actionDownloadExcel')->name('action-excel-data-member-raw');
-    Route::post('/data-member-raw/import-excel', 'DataMemberRawController@importExcel')->name('import-excel-data-member-raw');
+    // Route::post('/ajax/data-member-raw', 'DataMemberRawController@ajax')->name('ajax-data-member-raw');
+    // Route::post('/data-member-raw/export-excel', 'DataMemberRawController@exportExcel')->name('export-excel-data-member-raw');
+    // Route::get('/data-member-raw/action-excel/{filename}', 'DataMemberRawController@actionDownloadExcel')->name('action-excel-data-member-raw');
+    // Route::post('/data-member-raw/import-excel', 'DataMemberRawController@importExcel')->name('import-excel-data-member-raw');
 
     Route::get('/akumulasi-poin', 'AkumulasiPoinController@index')->name('akumulasi-poin.index');
     Route::post('/ajax/akumulasi-poin', 'AkumulasiPoinController@ajax')->name('ajax-akumulasi-poin');

@@ -3,12 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use DataTables;
 
 class UnicharmMember extends Model
 {
+    use HasFactory;
+
     protected $table = 'unicharm_member';
     protected $guarded = [];
+
+    protected $fillable = [
+        'id_member',
+        'no_hp',
+    ];
 
     public static function datatables($data_member)
     {
@@ -27,4 +35,9 @@ class UnicharmMember extends Model
 
         return $datatables;
     }
+
+
+    
+
+
 }

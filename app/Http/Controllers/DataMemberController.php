@@ -10,6 +10,7 @@ use App\Models\UnicharmMember;
 use App\Models\DataSales;
 use Rap2hpoutre\FastExcel\FastExcel;
 use App\Imports\ImportUnicharmMember;
+use App\Exports\ExportUnicharmMember;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 use App\Helpers\CleanNoHP;
@@ -24,6 +25,8 @@ class DataMemberController extends Controller
         $user = Auth::user();
         return view('data_member_index', compact('user', 'list_batch'));
     }
+
+
 
     public function ajax(Request $request)
     {
@@ -88,6 +91,11 @@ class DataMemberController extends Controller
        Excel::import(new ImportUnicharmMember, $path);       
 
         return back()->with('success', 'Excel Data Imported successfully.');
+    }
+
+    public function export() 
+    {
+        return Excel::download(new ExportUnicharmMember, 'data-member ' .now(). '.xlsx');
     }
 
     public function actionDownloadExcel($file_name)
