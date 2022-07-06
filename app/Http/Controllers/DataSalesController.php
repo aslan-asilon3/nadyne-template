@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\DB;
 class DataSalesController extends Controller
 {
     use CleanNoHP;
+
     public function index()
     {
         // $list_batch = DataSales::getBatch();
