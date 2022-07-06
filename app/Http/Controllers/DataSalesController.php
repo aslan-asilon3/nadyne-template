@@ -19,12 +19,15 @@ use Illuminate\Support\Facades\DB;
 class DataSalesController extends Controller
 {
     use CleanNoHP;
+
     public function index()
     {
         // $list_batch = DataSales::getBatch();
-        $list_batch = DB::table('data_sales')->get();
+        // $list_batch = DB::table('data_sales')->get();
+        $batch_group_by = DataSales::getBatch();
+
         $user = Auth::user();
-        return view('data_sales_index', compact('user', 'list_batch'));
+        return view('data_sales_index', compact('user', 'batch_group_by'));
     }
 
     public function ajax(Request $request)
@@ -158,6 +161,7 @@ class DataSalesController extends Controller
 
     //     $data_sales->orderBy('id', 'ASC');
 
+<<<<<<< HEAD
     //     $content = $data_sales->get();
 
     //     $filename = 'data-sales-'.date('Y-m-d-H-i');
@@ -181,5 +185,21 @@ class DataSalesController extends Controller
     //     return $filename;
     // }
 
+=======
+    public function importexcel(Request $request)
+    {
+
+        $request->validate([
+                'file' => 'required|max:10000|mimes:xlsx,xls',
+            ]);
+
+        $path = $request->file('file');
+
+
+        Excel::import(new ImportDataSales, $path);
+
+        return back()->with('success', 'Excel Data Imported successfully.');
+    }
+>>>>>>> 208a9fdfa38e9249e4fa3a1b93ec3773bd0f33ae
 
 }
