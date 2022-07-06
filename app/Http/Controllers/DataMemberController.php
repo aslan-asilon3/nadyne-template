@@ -26,6 +26,25 @@ class DataMemberController extends Controller
         return view('data_member_index', compact('user', 'list_batch'));
     }
 
+    public function importexcel(Request $request)
+    {
+  
+        $request->validate([
+                'file' => 'required|max:10000|mimes:xlsx,xls',
+            ]);
+            
+        $path = $request->file('file');
+
+
+       Excel::import(new ImportUnicharmMember, $path);       
+
+        return back()->with('success', 'Excel Data Imported successfully.');
+    }
+
+    public function export() 
+    {
+        return Excel::download(new ExportUnicharmMember, 'data-member ' .now(). '.xlsx');
+    }
 
 
     public function ajax(Request $request)
@@ -49,25 +68,7 @@ class DataMemberController extends Controller
     }
 
 
-    public function importexcel(Request $request)
-    {
-  
-        $request->validate([
-                'file' => 'required|max:10000|mimes:xlsx,xls',
-            ]);
-            
-        $path = $request->file('file');
 
-
-       Excel::import(new ImportUnicharmMember, $path);       
-
-        return back()->with('success', 'Excel Data Imported successfully.');
-    }
-
-    public function export() 
-    {
-        return Excel::download(new ExportUnicharmMember, 'data-member ' .now(). '.xlsx');
-    }
 
     // public function actionDownloadExcel($file_name)
     // {

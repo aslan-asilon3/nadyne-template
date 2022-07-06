@@ -10,21 +10,9 @@ use Illuminate\Support\Facades\DB;
 use App\Helpers\CleanNoHP;
 use Carbon\Carbon;
 
-class Index extends Component
+class Create extends Component
 {
     use CleanNoHP;
-
-    public $datamembers;
-
-    public function render()
-    {
-        $datamembers = 'datamembers';
-        
-        $this->datamembers = UnicharmMember::select('id_member','no_hp')->get();
-        return view('livewire.unicharm-member.index');
-
-
-    }  
 
 
 }

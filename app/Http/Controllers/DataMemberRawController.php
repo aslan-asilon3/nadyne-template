@@ -28,26 +28,6 @@ class DataMemberRawController extends Controller
     }
 
 
-    public function importexcel(Request $request)
-    {
-        
-
-        $request->validate([
-            'file' => 'required|max:10000|mimes:xlsx,xls',
-        ]);
-        
-    $path = $request->file('file');
-
-   
-    Excel::import(new ImportUnicharmMemberRaw, $path); 
-    
-    return back()->with('success', 'Excel Data Imported successfully.');
-    }
-
-    public function export() 
-    {
-        return Excel::download(new ExportUnicharmMemberRaw, 'data-member-raw ' .now(). '.xlsx');
-    }
 
     public function ajax(Request $request)
     {
@@ -78,6 +58,30 @@ class DataMemberRawController extends Controller
         // \Log::info(DB::getQueryLog());
 
         return $datatables;
+    }
+
+    public function export() 
+    {
+        
+        return Excel::download(new ExportUnicharmMemberRaw, 'data-member-raw ' .now(). '.xlsx');
+    }
+
+
+
+    public function import(Request $request) 
+    {
+        // dd($request->all());
+        $request->validate([
+            'file' => 'required|max:10000|mimes:xlsx,xls',
+        ]);
+        
+        $path = $request->file('file');
+
+ 
+        Excel::import(new ImportUnicharmMemberRaw,$path);
+ 
+            
+        return redirect('/data-member-raw')->with('success', 'The file has been excel imported to database ');
     }
 
     // public function ajax(Request $request)

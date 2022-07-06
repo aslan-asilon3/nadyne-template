@@ -102,7 +102,9 @@
 
     {{-- Base Scripts --}}
     @if(!config('adminlte.enabled_laravel_mix'))
-        <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+        {{-- <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script> --}}
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.js"></script>
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 
@@ -110,6 +112,43 @@
         @include('adminlte::plugins', ['type' => 'js'])
 
         <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+ <script type="text/javascript">
+     var SITEURL = "{{URL('/')}}";
+     $(function () {
+         $(document).ready(function () {
+             var bar = $('.bar');
+             var percent = $('.percent');
+             $('form').ajaxForm({
+                 beforeSend: function () {
+                     var percentVal = '0%';
+                     bar.width(percentVal)
+                     percent.html(percentVal);
+                 },
+                 uploadProgress: function (event, position, total, percentComplete) {
+                     var percentVal = percentComplete + '%';
+                     bar.width(percentVal)
+                     percent.html(percentVal);
+                 },
+                 complete: function (xhr) {
+                swal({
+                type: "success",
+                icon: "success",
+                title: "BERHASIL!",
+                text: "Berhasil Upload",
+                timer: 1500,
+                showConfirmButton: false,
+                showCancelButton: false,
+                buttons: false,
+            }).then(function () {
+                location.reload();
+            });
+                    //  window.location.href = SITEURL + "/" + "datasale";
+                }
+             });
+         });
+     });
+ </script>
     @else
         <script src="{{ mix(config('adminlte.laravel_mix_js_path', 'js/app.js')) }}"></script>
     @endif

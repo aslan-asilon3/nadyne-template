@@ -10,6 +10,21 @@ class DataSales extends Model
     protected $table = 'data_sales';
     protected $guarded = [];
 
+
+    protected $fillable = [
+        'id_member',
+        'batch',
+        'order_id',
+        'poin',
+        'no_hp',
+        'tanggal',
+        'source',
+        'recipient',
+        'status_member',
+        'status_cek_is_member',
+        'status_cek_poin',
+    ];
+
     public static function datatables($data_sales)
     {
         $datatables = Datatables::of($data_sales)

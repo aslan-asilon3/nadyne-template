@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\UnicharmMemberraw\Create;
+use App\Http\Controllers\DataMemberRawController;
+use App\Http\Controllers\DataSalesController;
+use App\Http\Controllers\AkumulasiPoinController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,31 +41,40 @@ Auth::routes([
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
 
-    Route::get('/data-sales', 'DataSalesController@index')->name('data-sales.index');
+    // =====Data Sales 
+    Route::get('/data-sales', function () {
+        return view('livewire.data-sales.index');
+    }); 
     Route::post('/ajax/data-sales', 'DataSalesController@ajax')->name('ajax-data-sales');
-    Route::post('/data-sales/export-excel', 'DataSalesController@exportExcel')->name('export-excel-data-sales');
-    Route::get('/data-sales/action-excel/{filename}', 'DataSalesController@actionDownloadExcel')->name('action-excel-data-sales');
-    Route::post('/data-sales/import-excel', 'DataSalesController@importExcel')->name('import-excel-data-sales');
+    Route::get('data-sales/export', [DataSalesController::class, 'export'])->name('data-sales-export');
+    Route::post('data-sales/import', [DataSalesController::class, 'import'])->name('data-sales-import');
+    // =====End Data Sales 
+    
     
     // =====Data Member 
-    Route::get('/data-member', 'DataMemberController@index')->name('data-member.index');
-    Route::get('/data-member/export', 'DataMemberController@export')->name('export-unicharm-member');
+    Route::get('/data-member', function () {
+        return view('livewire.unicharm-member.index');
+    }); 
     Route::post('/ajax/data-member', 'DataMemberController@ajax')->name('ajax-data-member');
-    // Route::post('/data-member/export-excel', 'DataMemberController@exportExcel')->name('export-excel-data-member');
-    // Route::get('/data-member/action-excel/{filename}', 'DataMemberController@actionDownloadExcel')->name('action-excel-data-member');
-    // Route::post('/data-member/import-excel', 'DataMemberController@importExcel')->name('import-excel-data-member');
-    // Route::post('import', [HomeController::class, 'import'])->name('import');
+    Route::get('/data-member/export', 'DataMemberController@export')->name('export-unicharm-member');
+    // =====End Data Member 
 
+    
     // =====Data Member Raw
-    Route::get('/data-member-raw', 'DataMemberRawController@index')->name('data-member-raw.index');
-    Route::get('/data-member-raw/export', 'DataMemberRawController@export')->name('export-unicharm-member-raw');
+    Route::get('/data-member-raw', function () {
+        return view('livewire.unicharm-memberraw.index');
+    });    
     Route::post('/ajax/data-member-raw', 'DataMemberRawController@ajax')->name('ajax-data-member-raw');
-    // Route::post('/data-member-raw/export-excel', 'DataMemberRawController@exportExcel')->name('export-excel-data-member-raw');
-    // Route::get('/data-member-raw/action-excel/{filename}', 'DataMemberRawController@actionDownloadExcel')->name('action-excel-data-member-raw');
-    // Route::post('/data-member-raw/import-excel', 'DataMemberRawController@importExcel')->name('import-excel-data-member-raw');
+    Route::get('memberraw/export', [DataMemberRawController::class, 'export'])->name('memberraw-export');
+    Route::post('memberraw/import', [DataMemberRawController::class, 'import'])->name('memberraw-import');
+    // =====End Data Member Raw
+    
+    
+    // =====Data Akumulasi Poin
+    Route::get('/akumulasi-poin', function () {
+        return view('livewire.akumulasi-poin.index');
+    }); 
+    Route::post('/ajax/akumulasi-poin', [AkumulasiPoinController::class, 'ajax'])->name('ajax-akumulasi-poin');
+    // =====End Data Akumulasi Poin
 
-    Route::get('/akumulasi-poin', 'AkumulasiPoinController@index')->name('akumulasi-poin.index');
-    Route::post('/ajax/akumulasi-poin', 'AkumulasiPoinController@ajax')->name('ajax-akumulasi-poin');
-    Route::post('/akumulasi-poin/export-excel', 'AkumulasiPoinController@exportExcel')->name('export-excel-akumulasi-poin');
-    Route::get('/akumulasi-poin/action-excel/{filename}', 'AkumulasiPoinController@actionDownloadExcel')->name('action-excel-akumulasi-poin');
 });

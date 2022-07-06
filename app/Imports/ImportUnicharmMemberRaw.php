@@ -19,6 +19,7 @@ class ImportUnicharmMemberRaw implements ToModel, WithStartRow
  
         $UpdateMember->id_member = $row[1];
         $UpdateMember->no_hp = $this->cek($row[2]);
+        $UpdateMember->status_cek_data = $row[3];
  
         $UpdateMember->save();
 

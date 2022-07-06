@@ -12,6 +12,14 @@ class AkumulasiPoin extends Model
     protected $table = 'akumulasi_poin';
     protected $guarded = [];
 
+    protected $fillable = [
+        'id_member',
+        'no_hp',
+        'batch',
+        'poin',
+        'status_cek_membership',
+    ];
+
     public static function datatables($akumulasi_poin)
     {
         $datatables = Datatables::of($akumulasi_poin)
