@@ -24,9 +24,9 @@
         </div>
         <div class="row">
             <div class="col-12">
-                
+
                 <button type="button" class="btn btn-secondary btn-reset btn-flat" id="reset" style="display:none"><i class="fas fa-sync"></i> Reset</button>
-                
+
             </div>
         </div>
         <div class="mb-3"></div>
@@ -112,7 +112,7 @@
                                     <label for="desc_info">Batch</label>
                                     <select class="form-control" name="batch" id="batch">
                                         <option value="">-- Select Batch --</option>
-                                        @foreach ($list_batch as $b)
+                                        @foreach ($batch_group_by as $b)
                                             <option value="{{ $b->batch }}">{{ $b->batch }}</option>
                                         @endforeach
                                     </select>
