@@ -9,6 +9,36 @@
 @stop
 
 @section('content')
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<style>
+
+    body{
+        background: #ccc;
+    }
+
+    form{
+        background: #fff;
+        padding: 20px;
+    }
+
+    .progress { 
+        position:relative;
+        width:100%;
+    }
+    .bar { 
+        background-color: #00ff00;
+        width:0%;
+        height:20px;
+    }
+    .percent {
+        position:absolute;
+        display:inline-block; 
+        left:50%;
+        color: #040608;
+    }
+</style>
+
 <div class="card">
     <div class="card-body">
         <div class="row">
@@ -21,6 +51,12 @@
                 <a type="text" class="btn btn-primary btn-flat" id="filter-show"><i class="fas fa-search"></i> Filter</a>
                 <button class="btn btn-success" type="submit"><i class="fas fa-download"></i>Import User Data</button>
                 <a type="button" href="{{ route('memberraw-export') }}" class="btn btn-warning btn-flat"><i class="fas fa-download"></i> Export Excel</a>
+                         
+                <div class="progress" style="text-align: center;height:20px;">
+                    <div class="bar" style="text-align: center;height:20px;"></div >
+                    <div class="percent" style="text-align: center; height:20px; padding-top:10px;margin:none;">0%</div >
+                </div>
+
             </form>
         </div>
         <div class="row">
@@ -52,6 +88,7 @@
         @endif
 
         <table class="table table-bordered" id="data_member_raw_table" style="width:100%;">
+            
             <thead class="thead-light text-primary">
                 <tr>
                     <th class="text-center">No</th>
@@ -77,9 +114,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    
                     <div class="row">
                                 <div class="col-md-6">
-
 
                                     <label for="id_member">ID Member</label>
                                     <input type="tel" name="id_member" id="id_member" class="form-control mb-2" />
@@ -165,33 +202,33 @@ $(document).ready(function() {
         $('.btn-reset').hide();
     });
 
-    $('#export_excel').on('click',function () {
-        var id_member           = $('#id_member').val();
-        var no_hp               = $('#no_hp').val();
-        var status_cek_data     = $('#status_cek_data').val();
+    // $('#export_excel').on('click',function () {
+    //     var id_member           = $('#id_member').val();
+    //     var no_hp               = $('#no_hp').val();
+    //     var status_cek_data     = $('#status_cek_data').val();
 
-        var download_url    = "{{ url('data-member-raw/action-excel') }}";
+    //     var download_url    = "{{ url('data-member-raw/action-excel') }}";
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+    //     $.ajaxSetup({
+    //         headers: {
+    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //         }
+    //     });
 
-        jQuery.ajax({
-            url:"{{ url('data-member-raw/export-excel') }}",
-            type:"POST",
-            data:{
-                id_member : id_member,
-                no_hp : no_hp,
-                status_cek_data: status_cek_data
-            },
-            success: function (result) {
-                console.log(result);
-                window.location.href = download_url + '/' +result;
-            }
-        });
-    });
+    //     jQuery.ajax({
+    //         url:"{{ url('data-member-raw/export-excel') }}",
+    //         type:"POST",
+    //         data:{
+    //             id_member : id_member,
+    //             no_hp : no_hp,
+    //             status_cek_data: status_cek_data
+    //         },
+    //         success: function (result) {
+    //             console.log(result);
+    //             window.location.href = download_url + '/' +result;
+    //         }
+    //     });
+    // });
 
 });
 </script>
@@ -229,4 +266,31 @@ $(document).ready(function() {
 		})
 	});
 </script>
+
+
+ <script type="text/javascript">
+     var SITEURL = "{{URL('/')}}";
+     $(function () {
+         $(document).ready(function () {
+             var bar = $('.bar');
+             var percent = $('.percent');
+             $('form').ajaxForm({
+                 beforeSend: function () {
+                     var percentVal = '0%';
+                     bar.width(percentVal)
+                     percent.html(percentVal);
+                 },
+                 uploadProgress: function (event, position, total, percentComplete) {
+                     var percentVal = percentComplete + '%';
+                     bar.width(percentVal)
+                     percent.html(percentVal);
+                 },
+                 complete: function (xhr) {
+                     alert('File Has Been Uploaded Successfully');
+                     window.location.href = SITEURL + "/" + "data-member-raw";
+                 }
+             });
+         });
+     });
+ </script>
 @stop

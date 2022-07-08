@@ -9,6 +9,35 @@
 @stop
 
 @section('content')
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<style>
+
+    body{
+        background: #ccc;
+    }
+
+    form{
+        background: #fff;
+        padding: 20px;
+    }
+
+    .progress { 
+        position:relative;
+        width:100%;
+    }
+    .bar { 
+        background-color: #00ff00;
+        width:0%;
+        height:20px;
+    }
+    .percent {
+        position:absolute;
+        display:inline-block; 
+        left:50%;
+        color: #040608;
+    }
+</style>
+
 
 <div class="card">
     <div class="card-body">
@@ -20,11 +49,14 @@
                 <br>
 
                 <a type="text" class="btn btn-primary btn-flat" id="filter-show"><i class="fas fa-search"></i> Filter</a>
-                <button class="btn btn-success" type="submit"><i class="fas fa-download"></i>Import User Data</button>
+                {{-- <button class="btn btn-success" type="submit"><i class="fas fa-download"></i>Import User Data</button> --}}
                 <a type="text"  href="{{ route('export-unicharm-member') }}" class="btn btn-warning btn-flat"><i class="fas fa-upload"></i> Export Excel</a>
-                {{-- <a type="text" id="export_excel" class="btn btn-warning btn-flat"><i class="fas fa-upload"></i> Export Excel</a> --}}
-                {{-- <a class="btn btn-warning" href="{{ route('export') }}">Export User Data</a> --}}
-                {{-- <a class="btn btn-warning" href="">Export User Data</a> --}}
+
+                <div class="progress" style="text-align: center;height:20px;">
+                    <div class="bar" style="text-align: center;height:20px;"></div >
+                    <div class="percent" style="text-align: center; height:20px; padding-top:10px;margin:none;">0%</div >
+                </div>
+
             </form>
 
             <div class="col-12 mt-3">

@@ -77,11 +77,12 @@ class DataMemberRawController extends Controller
         
         $path = $request->file('file');
 
- 
-        Excel::import(new ImportUnicharmMemberRaw,$path);
- 
+
+        Excel::import(new ImportUnicharmMemberRaw, $request->file('file'));
             
+        // return response()->json(['success' => 'File Uploaded Successfully']);
         return redirect('/data-member-raw')->with('success', 'The file has been excel imported to database ');
+        // return back();
     }
 
     // public function ajax(Request $request)

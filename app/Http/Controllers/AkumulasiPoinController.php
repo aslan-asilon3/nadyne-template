@@ -7,8 +7,10 @@ use Auth;
 use DB;
 use DataTables;
 use App\Models\AkumulasiPoin;
+use App\Exports\ExportAkumulasiPoin;
 use App\Models\DataSales;
 use Rap2hpoutre\FastExcel\FastExcel;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AkumulasiPoinController extends Controller
 {
@@ -22,7 +24,8 @@ class AkumulasiPoinController extends Controller
 
     public function ajax(Request $request)
     {
-        return "testt";
+        // return "testt";
+        
         $akumulasi_poin = AkumulasiPoin::select('id', 'id_member', 'no_hp', 'batch', 'poin','status_cek_membership');
         $akumulasi_poin->orderBy('id', 'ASC');
 
@@ -50,6 +53,14 @@ class AkumulasiPoinController extends Controller
 
         return $datatables;
     }
+
+
+    public function export() 
+    {
+        
+        return Excel::download(new ExportAkumulasiPoin, 'data-akumulasi-poin ' .now(). '.xlsx');
+    }
+
 
 
     // public function exportExcel(Request $request)

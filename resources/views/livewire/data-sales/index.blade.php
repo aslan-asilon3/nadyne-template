@@ -9,7 +9,7 @@
 @stop
 
 @push('css')
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <style>
 
     body{
@@ -54,7 +54,7 @@
                 
                 <button class="btn btn-success" type="submit"><i class="fas fa-download"></i>Import User Data</button>
 
-                <a class="btn btn-warning" href="{{ route('data-sales-export') }}"> Export User Data</a>
+                <a class="btn btn-warning" href="{{ route('data-sales-export') }}" > Export User Data</a>
 
                 <div class="progress" style="text-align: center;height:20px;">
                     <div class="bar" style="text-align: center;height:20px;"></div >
@@ -178,90 +178,110 @@
 @section('custom_js')
 <script type="text/javascript" src="{{ asset('vendor/datatables/FixedHeader-3.2.1/js/dataTables.fixedHeader.js') }}"></script>
 <script type="text/javascript">
-$(document).ready(function() {
-
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-    var tabel = $('#data_sales_table').DataTable({
-        processing: true,
-        ordering: true,
-        serverSide: true,
-        searching: false,
-        ajax: {
-            url: "{{ route('ajax-data-sales') }}",
-            type: 'POST',
-            data: function (d) {
-                d.id_member                = $('#id_member').val();
-                d.batch                    = $('#batch').val();
-                d.order_id                 = $('#order_id').val();
-                d.poin                     = $('#poin').val();
-                d.no_hp                    = $('#no_hp').val();
-                d.tanggal                  = $('#tanggal').val();
-                d.source                   = $('#source').val();
-                d.recipient                = $('#recipient').val();
-                d.status_member            = $('#status_member').val();
-                d.status_cek_is_member     = $('#status_cek_is_member').val();
-                d.status_cek_poin          = $('#status_cek_poin').val();
+    $(document).ready(function() {
+    
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
-        },
-        deferRender: true,
-        columns: [
-            { "data": "id", "name": "id",
-                render: function (data, type, row, meta) {
-                    return meta.row + meta.settings._iDisplayStart + 1;
+        });
+    
+        var tabel = $('#data_sales_table').DataTable({
+            processing: true,
+            ordering: true,
+            serverSide: true,
+            searching: false,
+            ajax: {
+                url: "{{ route('ajax-data-sales') }}",
+                type: 'POST',
+                data: function (d) {
+                    d.id_member     = $('#id_member').val();
+                    d.batch         = $('#batch').val();
+                    d.order_id         = $('#order_id').val();
+                    d.poin         = $('#poin').val();
+                    d.no_hp         = $('#no_hp').val();
+                    d.tanggal         = $('#tanggal').val();
+                    d.source         = $('#source').val();
+                    d.recipient         = $('#recipient').val();
+                    d.status_member         = $('#status_member').val();
+                    d.status_cek_is_memebr         = $('#status_cek_is_member').val();
+                    d.status_cek_poin         = $('#status_cek_poin').val();
+                    // d.created_at    = $('#created_at').val();
                 }
             },
-            { "data": "id_member", "name": "id_member" },
-            { "data": "batch", "name": "batch" },
-            { "data": "order_id", "name": "order_id" },
-            { "data": "poin", "name" : "poin" },
-            { "data": "no_hp", "name" : "no_hp" },
-            { "data": "tanggal", "name" : "tanggal" },
-            { "data": "source", "name" : "source" },
-            { "data": "recipient", "name": "recipient" },
-            { "data": "status_member", "name": "status_member" },
-            { "data": "status_cek_is_member", "name": "status_cek_is_member" },
-            { "data": "status_cek_poin", "name": "status_cek_poin" },
-            { "data": "created_at", "name" : "created_at" },
-        ],
-        pageLength: 50,
-        lengthMenu: [
-            [ 10, 50, 100, 300, 400 ],
-            [ '10 rows', '50 rows', '100 rows', '300 rows', '400 rows']
-        ]
+            deferRender: true,
+            columns: [
+                { "data": "id", "name": "id",
+                    render: function (data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                },
+                { "data": "id_member", "name": "id_member" },
+                { "data": "batch", "name" : "batch" },
+                { "data": "order_id", "name" : "order_id" },
+                { "data": "poin", "name" : "poin" },
+                { "data": "no_hp", "name" : "no_hp" },
+                { "data": "tanggal", "name" : "tanggal" },
+                { "data": "source", "name" : "source" },
+                { "data": "recipient", "name" : "recipient" },
+                { "data": "status_member", "name" : "status_member" },
+                { "data": "status_cek_is_member", "name" : "status_cek_is_member" },
+                { "data": "status_cek_poin", "name" : "status_cek_poin" },
+                { "data": "created_at", "name" : "created_at" },
+            ],
+            pageLength: 50,
+            lengthMenu: [
+                [ 10, 50, 100, 300, 400 ],
+                [ '10 rows', '50 rows', '100 rows', '300 rows', '400 rows']
+            ]
+        });
+    
+        $('#submit-filter').on('click',function (e) {
+            console.log($('#id_member').val());
+            $('#modal-filter').modal('hide');
+            tabel.draw();
+            e.preventDefault();
+            $('.btn-reset').show();
+        });
+    
+        $("#filter-show").on('click',function (e) {
+            $('#modal-filter').modal('show');
+        });
+    
+        $('#reset').click(function(e) {
+            $("#search-form").trigger("reset");
+            tabel.draw();
+            e.preventDefault();
+            $('.btn-reset').delay(1000).hide(0);
+        });
+    
+        // $('#export_excel').on('click',function () {
+        //     var id_member       = $('#id_member').val();
+        //     var no_hp           = $('#no_hp').val();
+        //     var download_url    = "{{ url('data-member/action-excel') }}";
+    
+        //     $.ajaxSetup({
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         }
+        //     });
+    
+        //     jQuery.ajax({
+        //         url:"{{ url('data-member/export-excel') }}",
+        //         type:"POST",
+        //         data:{
+        //             id_member : id_member,
+        //             no_hp : no_hp,
+        //         },
+        //         success: function (result) {
+        //             console.log(result);
+        //             window.location.href = download_url + '/' +result;
+        //         }
+        //     });
+        // });
+    
     });
-
-    $('#submit-filter').on('click',function (e) {
-        console.log($('#id_member').val());
-        $('#modal-filter').modal('hide');
-        tabel.draw();
-        e.preventDefault();
-        $('.btn-reset').show();
-    });
-
-    $("#filter-show").on('click',function (e) {
-        $('#modal-filter').modal('show');
-    });
-
-    $('#reset').click(function(e) {
-        $("#search-form").trigger("reset");
-        tabel.draw();
-        e.preventDefault();
-        $('.btn-reset').hide();
-    });
-
-   
-});
-
-</script>
-
-
-
-
+    </script>
 
 @stop
 

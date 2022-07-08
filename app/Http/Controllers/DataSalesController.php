@@ -33,7 +33,7 @@ class DataSalesController extends Controller
     public function ajax(Request $request)
     {
         DB::enableQueryLog(); // Enable query log
-        $data_sales = DataSales::select('id', 'id_member', 'batch',  'order_id','poin', 'no_hp', 'tanggal', 'source', 'recipient', 'status_member','status_cek_is_member','status_cek_poin','created_at');
+        $data_sales = DataSales::select('id', 'id_member', 'batch',  'order_id','no_hp','poin', 'tanggal', 'source', 'recipient', 'status_member','status_cek_is_member','status_cek_poin','created_at');
 
         // \Log::info('is-member : '.$request->is_member);
         // \Log::info(true == ($request->is_member == '0'));
@@ -95,8 +95,9 @@ class DataSalesController extends Controller
     }
 
 
-    public function export() 
+    public function export(Request $request) 
     {
+
         
         return Excel::download(new ExportDataSales, 'data-sales ' .now(). '.xlsx');
     }
@@ -161,7 +162,6 @@ class DataSalesController extends Controller
 
     //     $data_sales->orderBy('id', 'ASC');
 
-<<<<<<< HEAD
     //     $content = $data_sales->get();
 
     //     $filename = 'data-sales-'.date('Y-m-d-H-i');
@@ -185,21 +185,5 @@ class DataSalesController extends Controller
     //     return $filename;
     // }
 
-=======
-    public function importexcel(Request $request)
-    {
-
-        $request->validate([
-                'file' => 'required|max:10000|mimes:xlsx,xls',
-            ]);
-
-        $path = $request->file('file');
-
-
-        Excel::import(new ImportDataSales, $path);
-
-        return back()->with('success', 'Excel Data Imported successfully.');
-    }
->>>>>>> 208a9fdfa38e9249e4fa3a1b93ec3773bd0f33ae
 
 }

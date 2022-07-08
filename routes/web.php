@@ -75,6 +75,7 @@ Route::group(['middleware' => 'admin'], function () {
         return view('livewire.akumulasi-poin.index');
     }); 
     Route::post('/ajax/akumulasi-poin', [AkumulasiPoinController::class, 'ajax'])->name('ajax-akumulasi-poin');
+    Route::get('akumulasipoin/export', [AkumulasiPoinController::class, 'export'])->name('data-akumulasi-poin-export');
     // =====End Data Akumulasi Poin
 
 });

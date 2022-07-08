@@ -2,26 +2,24 @@
 
 namespace App\Exports;
 
-use App\Models\UnicharmMemberRaw;
+use App\Models\AkumulasiPoin;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class ExportUnicharmMemberRaw implements FromCollection, WithHeadings
+class ExportAkumulasiPoin implements FromCollection, WithHeadings
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        return UnicharmMemberRaw::all();
+        return AkumulasiPoin::all();
     }
 
     public function headings(): array {
         return [
-            "ID","ID Member","No HP","Status Cek Data","Created At","Updated At"
+            "ID","ID Member","No HP","Batch", "Poin", "Status Cek Membership", "Created At","Updated At"
         ];
     }
-
-    
 
 }
