@@ -52,9 +52,12 @@ Trait CleanNoHP{
         } else if (substr(trim($data), 0, 2) == '62'){
             // echo '1'.substr($data, 4). "\n";
             $data = "0".substr($data, 2);
-        } else {
+        } else if (substr(trim($data), 0, 1) == '8'){
+            // echo '1'.substr($data, 4). "\n";
+            $data = "08".substr($data, 1);
+        } 
+        else {
             if (substr(trim($data), 0, 1) == '0') {
-                // echo '0'.substr($data, 1). "\n";
                 $data = "0".substr($data, 1);
             }
         }

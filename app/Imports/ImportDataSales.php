@@ -48,9 +48,10 @@ class ImportDataSales implements ToModel, WithStartRow
             $Sum = DataSales::where('no_hp', '=', $this->cek($row[5]))->where('batch', $row[2])->sum('poin');
             $SumToAkum =  AkumulasiPoin::create([
                 'id_member'=> $row[1],
-                'no_hp'=> $this->cek($row[2]),
+                'no_hp'=> $this->cek($row[5]),
                 'batch'=> $row[2],
                 'poin'=>$Sum,
+                'akumulasi_poin'=> $row[5],
             ]);
         }
 

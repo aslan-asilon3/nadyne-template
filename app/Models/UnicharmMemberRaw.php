@@ -30,7 +30,10 @@ class UnicharmMemberRaw extends Model
 
                 return $result;
             })
-            // ->orderColumns(['id_member', 'no_hp'], '-:column $1')
+            ->editColumn('status_cek_data', function($data){
+                return $data->status_cek_data == "1" ? "<span class='badge badge-primary'>Active</span>" : "<span class='badge badge-danger'>Inactive</span>";
+            })
+            ->rawColumns(['status_cek_data'])
             ->make(true);
 
         return $datatables;

@@ -38,6 +38,10 @@ class DataSales extends Model
 
                 return $result;
             })
+            ->editColumn('status_cek_is_member', function($data){
+                return $data->status_cek_data == "1" ? "<span class='badge badge-primary'>Active</span>" : "<span class='badge badge-danger'>Inactive</span>";
+            })
+            ->rawColumns(['status_cek_is_member'])
             ->make(true);
 
         return $datatables;

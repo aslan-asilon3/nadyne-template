@@ -260,8 +260,12 @@ $(document).ready(function() {
 			],
 			//Set column definition initialisation properties.
 			"columnDefs":[
-                                // membuat kolom 0 (No.) dan kolom 1 (ID) tidak dapat di search dan sorting
-				{"searchable": false, "orderable": false, "targets": [0,1]},
+                    // membuat kolom 0 (No.) dan kolom 1 (ID) tidak dapat di search dan sorting
+				{
+                    "searchable": false, "orderable": false, "targets": [0,1],
+                },
+
+                
 			],
 		})
 	});

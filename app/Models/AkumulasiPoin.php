@@ -32,6 +32,10 @@ class AkumulasiPoin extends Model
 
                 return date("d-m-Y H:i:s", strtotime($akumulasi_poin->created_at));
             })
+            ->editColumn('status_cek_membership', function($data){
+                return $data->status_membership == "1" ? "<span class='badge badge-primary'>Active</span>" : "<span class='badge badge-danger'>Inactive</span>";
+            })
+            ->rawColumns(['status_cek_membership'])
             ->make(true);
 
         return $datatables;
