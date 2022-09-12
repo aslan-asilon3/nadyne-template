@@ -40,42 +40,4 @@ Auth::routes([
 
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
-
-    // =====Data Sales 
-    Route::get('/data-sales', function () {
-        return view('livewire.data-sales.index');
-    }); 
-    Route::post('/ajax/data-sales', 'DataSalesController@ajax')->name('ajax-data-sales');
-    Route::get('data-sales/export', [DataSalesController::class, 'export'])->name('data-sales-export');
-    Route::post('data-sales/import', [DataSalesController::class, 'import'])->name('data-sales-import');
-    // =====End Data Sales 
-    
-    
-    // =====Data Member 
-    Route::get('/data-member', function () {
-        return view('livewire.unicharm-member.index');
-    }); 
-    Route::post('/ajax/data-member', 'DataMemberController@ajax')->name('ajax-data-member');
-    Route::get('/data-member/export', 'DataMemberController@export')->name('export-unicharm-member');
-    // =====End Data Member 
-
-    
-    // =====Data Member Raw
-    Route::get('/data-member-raw', function () {
-        return view('livewire.unicharm-memberraw.index');
-    });    
-    Route::post('/ajax/data-member-raw', 'DataMemberRawController@ajax')->name('ajax-data-member-raw');
-    Route::get('memberraw/export', [DataMemberRawController::class, 'export'])->name('memberraw-export');
-    Route::post('memberraw/import', [DataMemberRawController::class, 'import'])->name('memberraw-import');
-    // =====End Data Member Raw
-    
-    
-    // =====Data Akumulasi Poin
-    Route::get('/akumulasi-poin', function () {
-        return view('livewire.akumulasi-poin.index');
-    }); 
-    Route::post('/ajax/akumulasi-poin', [AkumulasiPoinController::class, 'ajax'])->name('ajax-akumulasi-poin');
-    Route::get('akumulasipoin/export', [AkumulasiPoinController::class, 'export'])->name('data-akumulasi-poin-export');
-    // =====End Data Akumulasi Poin
-
 });
